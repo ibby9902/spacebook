@@ -1,21 +1,46 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-
+import createUser from '../../functions/network/createUser'
 const Signup = () => {
 
-    const [firstName, setFirstName] = React.useState('');
-    const [lastName, setLastName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [accountCreated, setAccountCreated] = useState(false);
 
-    return(
-        <View style={styles.container}>
-            <TextInput placeholder="First name" onChangeText={(val) => setFirstName(val)}/>
-            <TextInput placeholder="Last name" onChangeText={(val) => setLastName(val)}/>
-            <TextInput placeholder="Email" onChangeText={(val) => setEmail(val)}/>
-            <TextInput placeholder="Password" onChangeText={(val) => setPassword(val)} secureTextEntry={true} />
-        </View>
-    );
+    const [validEmail, setValidEmail] = useState(true);
+    const [validPassword, setValidPassword] = useState(true);
+
+    useEffect(() => {
+        //validateEmail(email, setValidEmail)
+        //validatePassword(password, setValidPassword)
+    })
+
+    const onSignupPress = () => {
+        if(validEmail && validPassword)
+        createUser(
+            firstName,
+            lastName,
+            email,
+            password,
+            setAccountCreated
+        )
+    }
+    if(accountCreated){
+        return (<View><Text>CREATED</Text></View>)
+    }
+    else {
+        return(
+            <View style={styles.container}>
+                <TextInput placeholder="First name" onChangeText={(val) => setFirstName(val)}/>
+                <TextInput placeholder="Last name" onChangeText={(val) => setLastName(val)}/>
+                <TextInput placeholder="Email" onChangeText={(val) => setEmail(val)}/>
+                <TextInput placeholder="Password" onChangeText={(val) => setPassword(val)} secureTextEntry={true} />
+                <TouchableOpacity title="Sign up" onPress={onSignupPress} style={styles.signupButton}><Text>Sign up</Text></TouchableOpacity>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
