@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import createUser from '../../functions/network/createUser'
+import createUser from '../../functions/createUser'
+import validateEmail from '../../functions/validateEmail';
+import validatePassword from '../../functions/validatePassword';
 const Signup = () => {
 
     const [firstName, setFirstName] = useState('');
@@ -13,8 +15,8 @@ const Signup = () => {
     const [validPassword, setValidPassword] = useState(true);
 
     useEffect(() => {
-        //validateEmail(email, setValidEmail)
-        //validatePassword(password, setValidPassword)
+        validateEmail(email, setValidEmail)
+        validatePassword(password, setValidPassword)
     })
 
     const onSignupPress = () => {
