@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-nativ
 
 const Signup = () => {
 
-    [firstName, setFirstName] = useState('');
-    [lastName, setLastName] = useState('');
-    [email, setEmail] = useState('');
-    [password, setPassword] = useState('');
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
 
     return(
         <View style={styles.container}>
