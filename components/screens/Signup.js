@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-nativ
 import createUser from '../../functions/createUser'
 import validateEmail from '../../functions/validateEmail';
 import validatePassword from '../../functions/validatePassword';
+import CustomInput from '../common/CustomInput';
+import CustomButton from '../common/CustomButton';
 const Signup = () => {
 
     const [firstName, setFirstName] = useState('');
@@ -35,11 +37,11 @@ const Signup = () => {
     else {
         return(
             <View style={styles.container}>
-                <TextInput placeholder="First name" onChangeText={(val) => setFirstName(val)}/>
-                <TextInput placeholder="Last name" onChangeText={(val) => setLastName(val)}/>
-                <TextInput placeholder="Email" onChangeText={(val) => setEmail(val)}/>
-                <TextInput placeholder="Password" onChangeText={(val) => setPassword(val)} secureTextEntry={true} />
-                <TouchableOpacity title="Sign up" onPress={onSignupPress} style={styles.signupButton}><Text>Sign up</Text></TouchableOpacity>
+                <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)}/>
+                <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)}/>
+                <CustomInput placeholder="Email" setValue={(val) => setEmail(val)}/>
+                <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureTextEntry={true} />
+                <CustomButton text="Sign up" onClick={onSignupPress} style={styles.signupButton} textStyle={styles.signupText}/>
             </View>
         );
     }
@@ -52,9 +54,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     signupButton: {
-        backgroundColor: 'red',
+        width: '75%',
+        height: 50,
+        padding: 15,
+        marginVertical: 5,
+        borderRadius: 5,
+        backgroundColor: 'dodgerblue'
         
-    }
+    },
+    signupText: {
+        fontWeight: 'bold',
+        color: 'white'
+    },
 })
 
 export default Signup;
