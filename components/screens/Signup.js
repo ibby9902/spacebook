@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#EAEDF4'
     },
     signupButton: {
         width: '75%',
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
         padding: 15,
         marginVertical: 5,
         borderRadius: 5,
-        backgroundColor: 'dodgerblue'
+        backgroundColor: '#768EDD'
         
     },
     signupText: {
