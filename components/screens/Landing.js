@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 
-const Landing = ({navigation}) => {
-    return(
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <View style={styles.textContainer}><Text style={styles.headerText}>Spacebook</Text></View>
-            </View>
-            <View style={styles.footerContainer} >
-                <View style={styles.buttonsContainer}>
-                    <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Login")}><Text style={{color: 'dodgerblue'}}>Log in</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.signupButton} onPress={()=> navigation.navigate("Signup")}><Text style={{color: 'white'}}>Sign up</Text></TouchableOpacity>
+class Landing extends Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return(
+            <View style={styles.container}>
+                <View style={styles.headerContainer}>
+                    <View style={styles.textContainer}><Text style={styles.headerText}>Spacebook</Text></View>
+                </View>
+                <View style={styles.footerContainer} >
+                    <View style={styles.buttonsContainer}>
+                        <TouchableOpacity style={styles.loginButton} onPress={() => this.props.navigation.navigate("Login")}><Text style={{color: 'dodgerblue'}}>Log in</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.signupButton} onPress={()=> this.props.navigation.navigate("Signup")}><Text style={{color: 'white'}}>Sign up</Text></TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        </View>
-    )
+        )
+
+    }
 
         
     
