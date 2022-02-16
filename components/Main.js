@@ -29,7 +29,7 @@ class Main extends Component {
         const value = await getToken();
         console.log(value)
         if(value == null)
-            this.props.navigation.navigate("Landing")
+            this.props.navigation.navigate("Login")
         
     }
     render(){
