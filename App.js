@@ -15,8 +15,7 @@ class App extends Component {
                 <NavigationContainer>
                     <Stack.Navigator initialRouteName='Main'>
                         <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
-                        <Stack.Screen name="Landing" component={Landing} options={{headerShown: false}}/>
-                        <Stack.Screen name="Login" component={Login}/>
+                        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
                         <Stack.Screen name="Signup" component={Signup}/>
                     </Stack.Navigator>
                 </NavigationContainer>
