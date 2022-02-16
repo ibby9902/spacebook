@@ -27,7 +27,6 @@ class Main extends Component {
 
     checkLoggedIn = async () => {
         const value = await getToken();
-        console.log(value)
         if(value == null)
             this.props.navigation.navigate("Login")
         
