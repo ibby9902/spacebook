@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image} from 'react-native';
 import storeData from '../../functions/storeData';
 import CustomInput from '../common/CustomInput';
 import CustomButton from '../common/CustomButton';
@@ -44,10 +44,16 @@ const LoginScreen = ({navigation}) => {
 
     return(
         <View style={styles.container}>
-            <CustomInput placeholder="Email" setValue={setEmail} value={email}/>
-            <CustomInput placeholder="Password" secureEntry={true} setValue={setPassword} value={password}/>
-            <CustomButton text="Login"  onClick={onLoginPress} style={styles.loginButton} textStyle={styles.loginText}/>
-            <CustomButton text="Sign Up "  onClick={() => navigation.navigate("Signup")} style={styles.signupButton} textStyle={styles.signupText}/>
+            <View style={styles.imageContainer}>
+            <Image source={require('../../assets/logo.png')} style={styles.image}/>
+            </View>
+            <View style={styles.formContainer}>
+                <CustomInput placeholder="Email" setValue={setEmail} value={email}/>
+                <CustomInput placeholder="Password" secureEntry={true} setValue={setPassword} value={password}/>
+                <CustomButton text="Login"  onClick={onLoginPress} style={styles.loginButton} textStyle={styles.loginText}/>
+                <CustomButton text="Sign Up "  onClick={() => navigation.navigate("Signup")} style={styles.signupButton} textStyle={styles.signupText}/>
+
+            </View>
         </View>
     )
 }
@@ -55,8 +61,7 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#EAEDF4'
     },
     loginButton: {
         width: '75%',
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
         padding: 15,
         marginVertical: 5,
         borderRadius: 5,
-        backgroundColor: 'dodgerblue'
+        backgroundColor: '#768EDD'
     },
     signupButton: {
         width: '75%',
@@ -72,15 +77,31 @@ const styles = StyleSheet.create({
         padding: 15,
         marginVertical: 5,
         borderRadius: 5,
+        marginBottom: 200,
         
     },
     signupText: {
         fontWeight: 'bold',
-        color: 'black'
+        color: '#4d5655'
     },
     loginText: {
         fontWeight: 'bold',
         color: 'white'
+    },
+    imageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    formContainer: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image: {
+        height: 220,
+        width: 220,
+
     }
 })
 export default LoginScreen;
