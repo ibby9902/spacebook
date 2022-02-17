@@ -6,7 +6,7 @@ import CustomButton from '../common/CustomButton';
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [loginError, setLoginError] = useState(false);
 
     const onLoginPress = () => {
         let to_send = {
@@ -26,9 +26,11 @@ const LoginScreen = ({navigation}) => {
                     return response.json()
                 }
                 else if(response.status === 400) {
+                    setLoginError(true);
                     throw "Invalid email or passord"
                 }
                 else {
+                    setLoginError(true);
                     throw "Something went wrong"
                 }
             })
@@ -42,6 +44,12 @@ const LoginScreen = ({navigation}) => {
             })
     }
 
+    const statusText = () => {
+        if(loginError){
+            return <Text style={styles.statusText}>Invalid email or password</Text>
+        }
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -52,7 +60,7 @@ const LoginScreen = ({navigation}) => {
                 <CustomInput placeholder="Password" secureEntry={true} setValue={setPassword} value={password}/>
                 <CustomButton text="Login"  onClick={onLoginPress} style={styles.loginButton} textStyle={styles.loginText}/>
                 <CustomButton text="Sign Up "  onClick={() => navigation.navigate("Signup")} style={styles.signupButton} textStyle={styles.signupText}/>
-
+                {statusText()}
             </View>
         </View>
     )
@@ -76,6 +84,8 @@ const styles = StyleSheet.create({
         height: 50,
         padding: 15,
         marginVertical: 5,
+        borderWidth: 3,
+        borderColor: '#768EDD',
         borderRadius: 5,
         marginBottom: 200,
         
@@ -102,6 +112,7 @@ const styles = StyleSheet.create({
         height: 220,
         width: 220,
 
-    }
+    },
+
 })
 export default LoginScreen;
