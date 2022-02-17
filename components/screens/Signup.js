@@ -15,7 +15,7 @@ const Signup = () => {
 
     const [validEmail, setValidEmail] = useState(true);
     const [validPassword, setValidPassword] = useState(true);
-
+    const [errorOnSignup, setErrorOnSignup] = useState(false);
     useEffect(() => {
         validateEmail(email, setValidEmail)
         validatePassword(password, setValidPassword)
@@ -28,23 +28,29 @@ const Signup = () => {
             lastName,
             email,
             password,
-            setAccountCreated
+            setAccountCreated,
+            setErrorOnSignup,
+            
         )
     }
-    if(accountCreated){
-        return (<View><Text>CREATED</Text></View>)
+
+    const statusText = () => {
+        if(accountCreated)
+            return <Text>Account Created!</Text>
+        else if(errorOnSignup)
+            return <Text>Something went wrong</Text>
     }
-    else {
         return(
             <View style={styles.container}>
                 <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)}/>
                 <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)}/>
-                <CustomInput placeholder="Email" setValue={(val) => setEmail(val)}/>
-                <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureTextEntry={true} />
+                <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} style={(validEmail ? {color: 'green'} : {color: 'red'})}/>
+                <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} />
                 <CustomButton text="Sign up" onClick={onSignupPress} style={styles.signupButton} textStyle={styles.signupText}/>
+                {statusText()}
             </View>
         );
-    }
+    
 }
 
 const styles = StyleSheet.create({
