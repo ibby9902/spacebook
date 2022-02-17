@@ -20,8 +20,12 @@ const createUser = (
         body: JSON.stringify(to_send)
     })
     .then((response) => {
-        console.log("User Created")
-        setAccountCreated(true)
+        if(response.status === 201){
+            setAccountCreated(true)
+        }
+        else{
+            setAccountCreated(false)
+        }
     })
     .catch((error) => {
         console.log(error)
