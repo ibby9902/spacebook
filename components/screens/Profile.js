@@ -3,6 +3,7 @@ import { Text, ScrollView, View, StyleSheet, FlatList} from 'react-native';
 import getId from '../../functions/getId';
 import getToken from '../../functions/getToken';
 import ProfileHeader from '../common/ProfileHeader'
+import getUserData from '../../functions/getUserData'
 //import getUserData from '../../functions/getUserData'
 class Profile extends Component {
     constructor(props){
@@ -15,31 +16,14 @@ class Profile extends Component {
         
     }
 
-    getUserData = async () => {
-        const id = await getId();
-        const token = await getToken();
-        return fetch(`http://localhost:3333/api/1.0.0/user/${id}`, {
-                headers: {
-                    "X-AUTHORIZATION": token,
-                },
-                method: 'get'
-            })
-            .then((response) => {
-                if(response.status === 200)
-                    return response.json();
-            })
-            .then((responseJson) => {
-                this.setState({firstName: responseJson.first_name})
-                this.setState({lastName: responseJson.last_name})
-                this.setState({friendCount: responseJson.friend_count})
-            } )
-            .catch((error) => {
-                console.log(error)
-            })
+    getProfileData = async () => {
+        const id  = await getId();
+        const data = await getUserData(id);
+        this.setState(data)
     }
 
     componentDidMount() {
-        this.getUserData();
+        this.getProfileData()
     }
 
     render() {
