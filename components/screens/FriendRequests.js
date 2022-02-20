@@ -47,7 +47,9 @@ class FriendRequests extends Component {
         }
         return (
             <ScrollView>
-               <FriendRequest firstName={this.state.friendData[0].first_name}/>
+                <FlatList data={this.state.friendData} renderItem={({item}) => <FriendRequest firstName={item.first_name} lastName={item.last_name} id={item.user_id}/>}
+                keyExtractor={({user_id}, index) => user_id}/>
+               
             </ScrollView>
         )
     }
