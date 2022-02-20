@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { Text, View,} from 'react-native';
+import { Text, ScrollView, StyleSheet} from 'react-native';
+import FriendRequest from '../common/FriendRequest';
 
 class Friends extends Component {
     render(){
         return (
-            <View></View>
+            <ScrollView style={styles.container}>
+                <FriendRequest firstName="first" lastName="second" />
+            </ScrollView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#eaedf4'
+    }
+})
 
 export default Friends;
