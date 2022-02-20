@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, StyleSheet} from 'react-native';
-import FriendRequest from '../common/FriendRequest';
-
+import { View, ScrollView, StyleSheet} from 'react-native';
+import CustomButton from '../common/CustomButton';
+import Friend from '../common/Friend';
 class Friends extends Component {
+    constructor(props){
+        super(props);
+        
+    }
+
+    
+
     render(){
         return (
             <ScrollView style={styles.container}>
-                <FriendRequest firstName="first" lastName="second" />
+                <View style={styles.header}>
+                    <CustomButton text="Friend Requests" style={styles.button} onClick={() => this.props.navigation.navigate("Friend Requests")} />
+                </View>
+                <Friend/>
+                {/* List of Friend Components */}
             </ScrollView>
         )
     }
@@ -15,6 +26,17 @@ class Friends extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#eaedf4'
+    },
+    header: {
+        height: 200,
+        backgroundColor: 'blue',
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    button: {
+        width: '20%',
+        backgroundColor: 'red'
     }
 })
 
