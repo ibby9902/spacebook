@@ -4,6 +4,7 @@ import getId from '../../functions/getId';
 import getToken from '../../functions/getToken';
 import ProfileHeader from '../common/ProfileHeader'
 import getUserData from '../../functions/getUserData'
+import Post from '../../components/common/Post'
 //import getUserData from '../../functions/getUserData'
 class Profile extends Component {
     constructor(props){
@@ -28,8 +29,16 @@ class Profile extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView >
                 <ProfileHeader firstName={this.state.firstName} lastName={this.state.lastName} friendCount={this.state.friendCount}/>
+                <View style={styles.content}>
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                </View>
                 {/* <FlatList style={styles.content}/> */}
                 
             </ScrollView>
@@ -39,7 +48,9 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
     content: {
-
+        flex: 1,
+        backgroundColor: '#eaedf4',
+        alignItems: 'center'
     }
 })
 
