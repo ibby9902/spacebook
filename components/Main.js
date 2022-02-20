@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profile from './screens/Profile'
-import Friends from './screens/Friends'
+import FriendsStack from './navigation/FriendsStack'
 import Search from './screens/Search'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import getToken from '../functions/getToken'
@@ -36,7 +36,7 @@ class Main extends Component {
             <Tab.Navigator>
                 <Tab.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
                 <Tab.Screen name="Search" component={Search} options={{headerShown: false}}/>
-                <Tab.Screen name="Friends" component={Friends} options={{headerShown: false}}/>
+                <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false}}/>
             </Tab.Navigator>
         )
     }
