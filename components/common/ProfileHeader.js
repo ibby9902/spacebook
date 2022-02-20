@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     profileHeader: {
         width: '100%',
         height: 300,
-        backgroundColor: 'red',
+        backgroundColor: '#b8c5f3',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center'
