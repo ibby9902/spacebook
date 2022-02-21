@@ -10,9 +10,8 @@ class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            firstName: '',
-            lastName: '',
-            friendCount: 0,
+            isLoading: true,
+            postData: []
         }
         
     }
@@ -23,26 +22,53 @@ class Profile extends Component {
         this.setState(data)
     }
 
+    getPostData = async () => {
+        const id  = await getId();
+        const token = await getToken();
+        return fetch(`http://localhost:3333/api/1.0.0/user/${id}/post`,{
+            headers: {
+                "X-AUTHORIZATION": token
+            },
+            method: 'get'
+        })
+        .then((response) => {
+            if(response.status === 200)
+                return response.json();
+        })
+        .then((responseJson) => {
+            this.setState({
+                isLoading: false,
+                postData: responseJson
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
     componentDidMount() {
         this.getProfileData()
+        this.getPostData()
     }
 
     render() {
+        if(this.state.isLoading){
+            return(<View><Text>LOADNIG</Text></View>)
+        }
+        else{
+
         return (
             <ScrollView >
                 <ProfileHeader firstName={this.state.firstName} lastName={this.state.lastName} friendCount={this.state.friendCount}/>
                 <View style={styles.content}>
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
                 </View>
-                {/* <FlatList style={styles.content}/> */}
+                <FlatList data={this.state.postData} renderItem={({item}) => 
+                    <Post data={item}/>
+                    } keyExtractor={({post_id}, index) => post_id}/>
                 
             </ScrollView>
         )
+        }
     }
 }
 
