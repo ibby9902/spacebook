@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 class Post extends Component {
-    //const [postText, setPostText] = useState('');
-    // timestamp/date ?
-    //const [author, setAuthor] = useState(''); // first + last name
-    //const [numLikes, setNumLikes] = useState(0);
+    constructor(props){
+        super(props)
+    }
     render() {
         return (
             <View style={styles.postContainer}>
-                <Text>First Name + Last Name</Text>
-                <Text>Post Text</Text>
-                <Text>Likes: 0</Text>
+                <Text>{this.props.data.author.first_name}<Text>{this.props.data.author.last_name}</Text></Text>
+                <Text>{this.props.data.text}</Text>
+                <Text>Likes: {this.props.data.numLikes}</Text>
             </View>
         )
 
