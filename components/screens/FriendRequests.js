@@ -8,11 +8,11 @@ class FriendRequests extends Component {
         super(props)
         this.state = {
             isLoading: true,
-            friendData: []
+            requestsData: []
         }
     }
 
-    getFriendData = async () => {
+    getFriendRequestData = async () => {
         const token = await getToken();
         return fetch(`http://localhost:3333/api/1.0.0/friendrequests`, {
             headers: {
@@ -27,7 +27,7 @@ class FriendRequests extends Component {
         .then((responseJson) => {
             this.setState({
                 isLoading: false,
-                friendData: responseJson})
+                requestsData: responseJson})
         })
         .catch((error) => {
             console.log(error);
@@ -36,7 +36,7 @@ class FriendRequests extends Component {
     }
 
     componentDidMount(){
-        this.getFriendData();
+        this.getFriendRequestData();
         
     }
 
@@ -47,7 +47,7 @@ class FriendRequests extends Component {
         }
         return (
             <ScrollView>
-                <FlatList data={this.state.friendData} renderItem={({item}) => <FriendRequest firstName={item.first_name} lastName={item.last_name} id={item.user_id}/>}
+                <FlatList data={this.state.requestsData} renderItem={({item}) => <FriendRequest firstName={item.first_name} lastName={item.last_name} id={item.user_id} data={this.state.requestsData}/>}
                 keyExtractor={({user_id}, index) => user_id}/>
                
             </ScrollView>
