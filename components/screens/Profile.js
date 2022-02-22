@@ -11,7 +11,8 @@ class Profile extends Component {
         super(props)
         this.state = {
             isLoading: true,
-            postData: []
+            postData: [],
+            userData: {}
         }
         
     }
@@ -19,7 +20,7 @@ class Profile extends Component {
     getProfileData = async () => {
         const id  = await getId();
         const data = await getUserData(id);
-        this.setState(data)
+        this.setState({"userData": data})
     }
 
     getPostData = async () => {
@@ -59,7 +60,7 @@ class Profile extends Component {
 
         return (
             <ScrollView >
-                <ProfileHeader firstName={this.state.firstName} lastName={this.state.lastName} friendCount={this.state.friendCount}/>
+                <ProfileHeader firstName={this.state.userData.firstName} lastName={this.state.userData.lastName} friendCount={this.state.userData.friendCount}/>
                 <View style={styles.content}>
                 </View>
                 <FlatList data={this.state.postData} renderItem={({item}) => 
