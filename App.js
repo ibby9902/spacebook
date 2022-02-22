@@ -13,7 +13,7 @@ class App extends Component {
         render() {
             return (
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName='Main'>
+                    <Stack.Navigator initialRouteName='Login'>
                         <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
                         <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
                         <Stack.Screen name="Signup" component={Signup}/>
