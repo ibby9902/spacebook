@@ -5,10 +5,13 @@ const ProfileHeader = (props) => {
     return(
         <View style={styles.profileHeader}>
             <TouchableOpacity style={styles.imageContainer}/>
-                <View>
+            
                     <Text style={styles.name}>{props.firstName} <Text style={styles.name}>{props.lastName}</Text></Text>
-                    <Text>Friends: {props.friendCount}</Text>
-                </View>
+            
+            <TouchableOpacity style={styles.friendsContainer}>
+                <Text style={styles.name}>Friends: {props.friendCount}</Text>
+
+            </TouchableOpacity>
         </View>
     )
 }
@@ -17,12 +20,12 @@ const styles = StyleSheet.create({
     profileHeader: {
         width: '100%',
         height: 300,
-        backgroundColor: '#b8c5f3',
-        flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     name: {
+        color: 'white',
         fontSize: 20,
         fontWeight: 'bold',
         
@@ -30,7 +33,15 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: 100,
         height: 100,
-        backgroundColor: 'green'
+        margin: 0,
+        backgroundColor: 'green',
+        borderRadius: 50,
+    },
+    friendsContainer: {
+        padding: 10,
+        borderRightWidth: 2,
+        borderLeftWidth: 2,
+        borderColor: '#32344c'
     }
 })
 
