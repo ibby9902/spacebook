@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View, StyleSheet, FlatList} from 'react-native';
+import { Text, ScrollView, View, StyleSheet, FlatList, ActivityIndicator, SafeAreaView} from 'react-native';
 import getId from '../../functions/getId';
 import getToken from '../../functions/getToken';
 import ProfileHeader from '../common/ProfileHeader'
@@ -54,20 +54,23 @@ class Profile extends Component {
 
     render() {
         if(this.state.isLoading){
-            return(<View><Text>LOADNIG</Text></View>)
+            return(
+                <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator/>
+                </SafeAreaView>
+            )
         }
         else{
 
         return (
+            <SafeAreaView style={{backgroundColor: '#191a2c', flex: 1}}>
             <ScrollView >
                 <ProfileHeader firstName={this.state.userData.firstName} lastName={this.state.userData.lastName} friendCount={this.state.userData.friendCount}/>
-                <View style={styles.content}>
-                </View>
                 <FlatList data={this.state.postData} renderItem={({item}) => 
                     <Post data={item}/>
                     } keyExtractor={({post_id}, index) => post_id}/>
-                
             </ScrollView>
+            </SafeAreaView>
         )
         }
     }
