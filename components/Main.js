@@ -1,60 +1,64 @@
-import React, {Component} from 'react'
+import React, { useState, useEffect} from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Profile from './screens/Profile'
+import { ActivityIndicator, View} from 'react-native'
+import ProfileStack from './navigation/ProfileStack'
 import FriendsStack from './navigation/FriendsStack'
 import Search from './screens/Search'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import getId from '../functions/getId';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import getToken from '../functions/getToken'
+import FriendRequests from './screens/FriendRequests';
+import theme from '../assets/theme';
 const Tab = createBottomTabNavigator();
 
 
 
 
-class Main extends Component {
-    constructor(props){
-        super(props)
-    }
+const Main = () => {
+    const [id, setId] = useState(0);
+    // get our id on first mount so we can pass it to Profile
+    useState(() => {
+        getId().then((res) => setId(res));
+    },[])
+    
+        if(id != 0) {
+            return (
+                <Tab.Navigator
+                screenOptions={({route}) => ({
+                    tabBarStyle: {
+                        backgroundColor: theme.DARK_GREY,
+                        borderTopColor: 'transparent'
+                    },
+                    tabBarLabel: '',
+                    tabBarIcon: ({focused, color, size}) => {
+                        let iconName;
+                        if(route.name === 'ProfileStack'){
+                            iconName = 'person-circle-outline'
+                            color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
+                        } else if(route.name === 'Search'){
+                            iconName = 'search-outline'
+                            color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
+                        } else if(route.name === 'Friends'){
+                            iconName = 'people-outline'
+                            color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
+                        }
+                        return <Ionicons name={iconName} size={size} color={color}/>
+                    },
+                })}>
+                    <Tab.Screen name="ProfileStack" component={ProfileStack} options={{headerShown: false}} initialParams={{id: id}}/>
+                    <Tab.Screen name="Search" component={Search} options={{headerShown: false}}/>
+                    <Tab.Screen name="Friends" component={FriendRequests} options={{headerShown: false}}/>
+                </Tab.Navigator>
+            )
 
-    componentDidMount(){
-        this.unsubscribe = this.props.navigation.addListener('focus', () => {
-            this.checkLoggedIn();
-        })
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-    checkLoggedIn = async () => {
-        const value = await getToken();
-        if(value == null)
-            this.props.navigation.navigate("Login")
-        
-    }
-    render(){
-        return (
-            <Tab.Navigator
-            screenOptions={({route}) => ({
-                tabBarLabel: '',
-                tabBarIcon: ({focused, color, size}) => {
-                    let iconName;
-                    if(route.name === 'Profile'){
-                        iconName = 'person-circle-outline'
-                    } else if(route.name === 'Search'){
-                        iconName = 'search-outline'
-                    } else if(route.name === 'Friends'){
-                        iconName = 'people-outline'
-                    }
-                    return <Ionicons name={iconName} size={size} color={color}/>
-                }
-            })}>
-                <Tab.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
-                <Tab.Screen name="Search" component={Search} options={{headerShown: false}}/>
-                <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false}}/>
-            </Tab.Navigator>
-        )
-    }
+        } else {
+            return(
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.DARK_GREY}}>
+                    <ActivityIndicator color={theme.TEXT_WHITE}/>
+                </View>
+            )
+        }
+    
     
 }
 
