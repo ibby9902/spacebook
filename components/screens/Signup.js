@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import createUser from '../../functions/createUser'
+import { StyleSheet, Text, View, Image } from 'react-native';
+import createUser from '../../functions/requests/createUser'
 import validateEmail from '../../functions/validateEmail';
 import validatePassword from '../../functions/validatePassword';
 import CustomInput from '../common/CustomInput';
 import CustomButton from '../common/CustomButton';
+import theme from '../../assets/theme'
 const Signup = () => {
 
     const [firstName, setFirstName] = useState('');
@@ -16,38 +17,70 @@ const Signup = () => {
     const [validEmail, setValidEmail] = useState(true);
     const [validPassword, setValidPassword] = useState(true);
     const [errorOnSignup, setErrorOnSignup] = useState(false);
+
+    // validate email & password on every update
     useEffect(() => {
         validateEmail(email, setValidEmail)
         validatePassword(password, setValidPassword)
     })
 
-    const onSignupPress = () => {
-        if(validEmail && validPassword)
-        createUser(
-            firstName,
-            lastName,
-            email,
-            password,
-            setAccountCreated,
-            setErrorOnSignup,
-            
-        )
+    const handleSignUp = () => {
+        if(firstName && lastName !== '' && validEmail && validPassword)
+        {
+            createUser(
+                firstName,
+                lastName,
+                email,
+                password,
+                setAccountCreated,
+                setErrorOnSignup,
+                
+            )
+        }
+    }
+
+    const showEmailErrorText = () => {
+        if(!validEmail)
+        {
+            return (
+                <Text style={styles.text}>Invalid Email address</Text>
+            )     
+        }
+    }
+
+    const showPasswordErrorText = () => {
+        if(!validPassword) 
+        {
+            return (
+                <Text style={styles.text}>Password must be longer than 5 characters</Text>
+            )  
+        }
     }
 
     const statusText = () => {
         if(accountCreated)
-            return <Text>Account Created!</Text>
+            return <Text style={styles.text}>Account Created!</Text>
         else if(errorOnSignup)
-            return <Text>Something went wrong</Text>
+            return <Text style={styles.text}>Something went wrong</Text>
     }
         return(
             <View style={styles.container}>
-                <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)}/>
-                <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)}/>
-                <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} style={(validEmail ? {color: 'green'} : {color: 'red'})}/>
-                <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} />
-                <CustomButton text="Sign up" onClick={onSignupPress} style={styles.signupButton} textStyle={styles.signupText}/>
-                {statusText()}
+                <View style={styles.imageContainer}>
+                    <Image source={require('../../assets/logo.png')} style={styles.image}/>
+                </View>
+                <View style={styles.formContainer}>
+                    <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)}/>
+                    <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)}/>
+                    <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} style={(validEmail ? {color: 'green'} : {color: 'red'})}/>
+                    <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} />
+                    <CustomButton text="Sign up" onClick={handleSignUp} style={styles.signupButton} textStyle={styles.signupText}/>
+                </View>
+                <View style={{flex:1,justifyContent: 'center', alignItems:'center',}}>
+                    {statusText()}
+                    {showEmailErrorText()}
+                    {showPasswordErrorText()}
+
+                </View>
             </View>
         );
     
@@ -56,9 +89,7 @@ const Signup = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#EAEDF4'
+        backgroundColor: theme.DARK_GREY
     },
     signupButton: {
         width: '75%',
@@ -66,12 +97,32 @@ const styles = StyleSheet.create({
         padding: 15,
         marginVertical: 5,
         borderRadius: 5,
-        backgroundColor: '#768EDD'
+        backgroundColor: theme.BUTTON_DARK_BLUE
         
     },
     signupText: {
         fontWeight: 'bold',
         color: 'white'
+    },
+    text: {
+        fontWeight: 'bold',
+        color: theme.TEXT_WHITE
+    },
+    imageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    formContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    image: {
+        marginTop: 20,
+        height: 200,
+        width: 200,
+
     },
 })
 
