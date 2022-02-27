@@ -1,49 +1,51 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CustomButton from './CustomButton';
-
-class Friend extends Component {
-
-
-    deleteFriend = () => {
-        console.log("friend deleted")
-    }
-
-    viewProfile = () => {
-        //this.props.navigation.navigate("Profile")
-    }
-
-    render(){
-        return (
-            <View style={styles.container}>
-                <Text>{this.props.firstName} <Text>{this.props.lastName}</Text></Text>
-                <View style={styles.buttonContainer}>
-                    <CustomButton text='View Profile' style={styles.deleteButton} onClick={this.viewProfile}/>
-                    <CustomButton text='Delete' style={styles.deleteButton} onClick={this.deleteFriend}/>
-                </View>
+import theme from '../../assets/theme'
+const Friend = (props) => {
+    return (
+        <View style={styles.container}>
+            <View style={styles.nameContainer}>
+                <Text style={styles.nameText}>{props.firstName} <Text style={styles.nameText}>{props.lastName}</Text></Text>
             </View>
-        )
-    }
+            <View style={styles.buttonContainer}>
+                <CustomButton text='View Profile' style={styles.viewProfile} onClick={() => props.viewProfile(props.id)} textStyle={styles.btnText}/>
+            </View>
+        </View>
+    )
+        
+    
 }
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: 100,
-        backgroundColor: 'red',
+        backgroundColor: theme.GREY_BLUE,
         justifyContent: 'center',
     },
     buttonContainer: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'center'
-    },
-    deleteButton: {
-        backgroundColor: 'orange'
+        alignItems: 'center',
     },
     viewProfile: {
-        backgroundColor: 'blue'
+        width: '40%',
+        height: 60,
+        backgroundColor: theme.BUTTON_DARK_BLUE
+    },
+    btnText: {
+        color: theme.TEXT_WHITE,
+        fontWeight: 'bold',
+    },
+    nameText: {
+        color: theme.TEXT_WHITE,
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    nameContainer: {
+        flex: 1,
+        alignItems: 'center'
     }
 })
 
