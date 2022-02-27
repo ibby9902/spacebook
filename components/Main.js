@@ -20,7 +20,7 @@ const Main = () => {
     useState(() => {
         getId().then((res) => setId(res));
     },[])
-    
+
         if(id != 0) {
             return (
                 <Tab.Navigator
@@ -47,7 +47,7 @@ const Main = () => {
                 })}>
                     <Tab.Screen name="ProfileStack" component={ProfileStack} options={{headerShown: false}} initialParams={{id: id}}/>
                     <Tab.Screen name="Search" component={Search} options={{headerShown: false}}/>
-                    <Tab.Screen name="Friends" component={FriendRequests} options={{headerShown: false}}/>
+                    <Tab.Screen name="Friends" component={FriendRequests} options={{headerShown: false, unmountOnBlur: true}}/>
                 </Tab.Navigator>
             )
 
