@@ -47,7 +47,7 @@ const Main = () => {
                 })}>
                     <Tab.Screen name="ProfileStack" component={ProfileStack} options={{headerShown: false}} initialParams={{id: id}}/>
                     <Tab.Screen name="Search" component={Search} options={{headerShown: false}}/>
-                    <Tab.Screen name="Friends" component={FriendRequests} options={{headerShown: false, unmountOnBlur: true}}/>
+                    <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false, unmountOnBlur: true}} initialParams={{id: id}}/>
                 </Tab.Navigator>
             )
 
