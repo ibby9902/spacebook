@@ -9,7 +9,6 @@ const login = async (data, setIsLoggedIn, setLoginError) => {
             })
             .then((response) => {
                 if(response.status === 200){
-                    setIsLoggedIn(true)
                     return response.json()
                 }
                 else {
@@ -20,6 +19,7 @@ const login = async (data, setIsLoggedIn, setLoginError) => {
             .then(async (responseJson) => {
                 storeData("id",responseJson.id)
                 storeData("token",responseJson.token)
+                setIsLoggedIn(true)
             })
             .catch((error) => {
                 console.log(error);
