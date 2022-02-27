@@ -1,58 +1,45 @@
-import React ,{ Component } from 'react';
-import { ScrollView, StyleSheet, FlatList, Text, View} from 'react-native';
+import React ,{ useState, useEffect } from 'react';
+import { ScrollView, StyleSheet, FlatList, Text, View, ActivityIndicator} from 'react-native';
 import FriendRequest from '../common/FriendRequest';
-import getToken from '../../functions/getToken';
-class FriendRequests extends Component {
+import getFriendRequests from '../../functions/requests/getFriendRequests';
+import theme from '../../assets/theme';
+const FriendRequests = (props) => {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            isLoading: true,
-            requestsData: []
-        }
-    }
+    const [isLoading, setIsLoading] = useState(true);
+    const [friendRequests, setFriendRequests] = useState([]);
+    const [emptyRequests, setEmptyRequests] = useState(true);
 
-    getFriendRequestData = async () => {
-        const token = await getToken();
-        return fetch(`http://localhost:3333/api/1.0.0/friendrequests`, {
-            headers: {
-                "X-AUTHORIZATION": token
-            },
-            method: 'get'
-        })
-        .then((response) => {
-            if(response.status === 200)
-                return response.json();
-        })
-        .then((responseJson) => {
-            this.setState({
-                isLoading: false,
-                requestsData: responseJson})
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+    useEffect(() => {
+        getFriendRequests(setIsLoading, setFriendRequests, setEmptyRequests)
+    }, [])
 
-    }
-
-    componentDidMount(){
-        this.getFriendRequestData();
-        
-    }
-
-    render() {
-
-        if(this.state.isLoading){
-            return(<View><Text>LOADNIG</Text></View>)
-        }
-        return (
-            <ScrollView>
-                <FlatList data={this.state.requestsData} renderItem={({item}) => <FriendRequest firstName={item.first_name} lastName={item.last_name} id={item.user_id} data={this.state.requestsData}/>}
-                keyExtractor={({user_id}, index) => user_id}/>
-               
-            </ScrollView>
+    if(isLoading){
+        return(
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.DARK_GREY}}>
+                <ActivityIndicator color={theme.TEXT_WHITE}/>
+            </View>
         )
     }
-}
+    else if(emptyRequests)
+    {
+        return (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.DARK_GREY}}>
+                <Text style={{fontWeight: 'bold', color: theme.TEXT_WHITE}}>No New Requests</Text>
+                <Text style={{color: theme.TEXT_LESS_WHITE}}>When people send you friend requests, they'll appear here.</Text>
+            </View>
+        )
+    }
+    else {
+        return (
+            <ScrollView style={{flex: 1, backgroundColor: theme.DARK_GREY, }}>
+                
+                    <FlatList data={friendRequests} renderItem={({item}) => <FriendRequest firstName={item.first_name} lastName={item.last_name} id={item.user_id} data={friendRequests}/>}
+                    keyExtractor={({user_id}, index) => user_id}/>
 
+                
+            </ScrollView>
+        ) 
+
+    }
+}
 export default FriendRequests;
