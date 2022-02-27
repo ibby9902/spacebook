@@ -12,6 +12,11 @@ const Friends = (props) => {
     useEffect(() => {
         getFriends(props.route.params.id, setIsLoading, setFriends);
     }, [])
+    
+    // pass this function to Friends as a prop, they can call it on button press
+    const viewProfile = (id) => {
+        props.navigation.navigate("Profile", {id: id})
+    }
 
     if(isLoading)
     {
@@ -32,7 +37,8 @@ const Friends = (props) => {
                     <CustomButton text="Requests" textStyle={styles.btnText} style={styles.button} onClick={() => props.navigation.navigate("Friend Requests")} />
                     </View>
                 </View>
-                <FlatList data={friends} renderItem={({item}) => <Friend firstName={item.user_givenname} lastName={item.user_familyname} id={item.user_id} state_data={friends}/>}
+                <FlatList data={friends} renderItem={({item}) => <Friend firstName={item.user_givenname} lastName={item.user_familyname} id={item.user_id} state_data={friends}
+                viewProfile={viewProfile}/>}
                 keyExtractor={({user_id}, index) => user_id}/>
             </ScrollView>
         )
