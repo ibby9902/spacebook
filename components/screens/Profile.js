@@ -7,25 +7,31 @@ import Post from '../../components/common/Post'
 import MiniPost from '../../components/common/MiniPost'
 import theme from '../../assets/theme';
 import getId from '../../functions/getId';
-const Profile = ({route}) => {
+
+const Profile = (props) => {
     const [isPostLoading, setIsPostLoading] = useState(true);
     const [isUserLoading, setIsUserLoading] = useState(true);
-    const [postData, setPostData] = useState([])
-    const [userData, setUserData] = useState({})
-    const [myID, setMyID] = useState(0)
+    const [postData, setPostData] = useState([]);
+    const [userData, setUserData] = useState({});
+    const [myID, setMyID] = useState(0);
+    const [isMyProfile, setIsMyProfile] = useState(false);
 
     useEffect(() => {
-        getUserData(route.params.id, setUserData, setIsUserLoading);
-        getAllUserPosts(route.params.id, setPostData, setIsPostLoading)
+        getUserData(props.route.params.id, setUserData, setIsUserLoading);
+        getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading)
         getId().then((res) => setMyID(parseInt(res)))
+        
     },[])
 
-    const renderNewPost = () => {
-        if(myID === parseInt(route.params.id)){
-            return (
-                <Text>NEW POST</Text>
-            )
-        }
+    useEffect(() => {
+        if(myID === parseInt(props.route.params.id))
+            setIsMyProfile(true);
+        else
+            setIsMyProfile(false)
+    }, [myID])
+
+    const onFriendsPress = () => {
+        props.navigation.navigate("UsersFriends", {firstName: userData.first_name, id: userData.user_id});
     }
         
     if(isPostLoading && isUserLoading){
@@ -38,8 +44,8 @@ const Profile = ({route}) => {
     else {
         return (
             <ScrollView style={{backgroundColor: theme.DARK_GREY, flex: 1}}>
-                <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count}/>
-                {renderNewPost()}
+                <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile}
+                onFriendsPress={onFriendsPress}/>
                 
                 <View style={styles.postContainer}>
                     <MiniPost />
@@ -59,6 +65,13 @@ const styles = StyleSheet.create({
     postContainer: {
         flex: 1,
         alignItems: 'center',
+    },
+    button: {
+        width: '30%',
+        backgroundColor: theme.BUTTON_DARK_BLUE
+    },
+    buttonContainer: {
+        backgroundColor: 'red'
     }
 })
 
