@@ -4,7 +4,7 @@ import CustomButton from '../common/CustomButton';
 import Friend from '../common/Friend';
 import getFriends from '../../functions/requests/getFriends';
 import theme from '../../assets/theme';
-const Friends = (props) => {
+const MyFriends = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [friends, setFriends] = useState([]);
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Friends;
+export default MyFriends;
