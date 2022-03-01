@@ -1,24 +1,13 @@
 import React from 'react';
 import theme from '../../assets/theme'
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput} from 'react-native';
 
-const CustomInput = ({value, setValue, placeholder, secureEntry, style}) => {
+const CustomInput = ({value, setValue, placeholder, secureEntry, multiline, styles}) => {
     return(
-        <View style={styles.container}>
-            <TextInput placeholder={placeholder} style={{backgroundColor: theme.DARK_GREY, color: 'white'}} value={value} onChangeText={setValue} secureTextEntry={secureEntry}/>
+        <View style={styles}>
+            <TextInput placeholder={placeholder} style={{backgroundColor: theme.GREY_BLUE, color: theme.TEXT_WHITE, flex: 1}} 
+            value={value} onChangeText={setValue} secureTextEntry={secureEntry} multiline={multiline}/>
         </View>
     );
 }
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: theme.DARK_GREY,
-        width: '75%',
-        height: 40,
-        borderColor: '#e8e8e8',
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        marginVertical: 5,
-    },
-})
 export default CustomInput;
