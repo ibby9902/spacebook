@@ -44,18 +44,18 @@ const Profile = (props) => {
     else {
         return (
             <ScrollView style={{backgroundColor: theme.DARK_GREY, flex: 1}}>
-                <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile}
-                onFriendsPress={onFriendsPress}/>
-                
-                <View style={styles.postContainer}>
-                    <MiniPost />
-                    <MiniPost />
-                    <MiniPost />
-                    <MiniPost />
+                <View style={{flex: 1, alignItems: 'center'}}>
+                    <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile}
+                    onFriendsPress={onFriendsPress}/>
+                    <View style={styles.postHeader}>
+                        <Text style={{color: theme.TEXT_WHITE, fontSize: 15, fontWeight: 'bold'}}>Posts</Text>
+                    </View>
+                    <View style={styles.postContainer}>
+                        <FlatList data={postData} renderItem={({item}) => 
+                            <MiniPost data={item}/> } keyExtractor={({post_id}, index) => post_id}/>
+                    </View>
+
                 </View>
-                {/* <FlatList data={postData} renderItem={({item}) => 
-                    <Post data={item}/>
-                    } keyExtractor={({post_id}, index) => post_id}/> */}
             </ScrollView>   
         )
     }   
@@ -63,8 +63,7 @@ const Profile = (props) => {
 
 const styles = StyleSheet.create({
     postContainer: {
-        flex: 1,
-        alignItems: 'center',
+        width: '80%'
     },
     button: {
         width: '30%',
@@ -72,6 +71,12 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: 'red'
+    },
+    postHeader: {
+        width: '80%',
+        borderBottomWidth: 1,
+        borderColor: theme.TEXT_LESS_WHITE,
+        paddingBottom: 10,
     }
 })
 
