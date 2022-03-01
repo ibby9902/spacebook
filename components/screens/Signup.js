@@ -69,10 +69,10 @@ const Signup = () => {
                     <Image source={require('../../assets/logo.png')} style={styles.image}/>
                 </View>
                 <View style={styles.formContainer}>
-                    <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)}/>
-                    <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)}/>
-                    <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} style={(validEmail ? {color: 'green'} : {color: 'red'})}/>
-                    <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} />
+                    <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)} styles={styles.input}/>
+                    <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)} styles={styles.input}/>
+                    <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} styles={styles.input}/>
+                    <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} styles={styles.input}/>
                     <CustomButton text="Sign up" onClick={handleSignUp} style={styles.signupButton} textStyle={styles.signupText}/>
                 </View>
                 <View style={{flex:1,justifyContent: 'center', alignItems:'center',}}>
@@ -124,6 +124,13 @@ const styles = StyleSheet.create({
         width: 200,
 
     },
+    input: {
+        backgroundColor: theme.DARK_GREY,
+        width: '75%',
+        height: 60,
+        padding: 10,
+        marginVertical: 5,
+    }
 })
 
 export default Signup;

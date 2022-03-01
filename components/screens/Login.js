@@ -38,8 +38,8 @@ const LoginScreen = ({navigation}) => {
             <Image source={require('../../assets/logo.png')} style={styles.image}/>
             </View>
             <View style={styles.formContainer}>
-                <CustomInput placeholder="Email" setValue={setEmail} value={email}/>
-                <CustomInput placeholder="Password" secureEntry={true} setValue={setPassword} value={password}/>
+                <CustomInput placeholder="Email" setValue={setEmail} value={email} styles={styles.input}/>
+                <CustomInput placeholder="Password" secureEntry={true} setValue={setPassword} value={password} styles={styles.input}/>
                 <CustomButton text="Login"  onClick={handleLogin} style={styles.loginButton} textStyle={styles.loginText}/>
                 <CustomButton text="Sign Up "  onClick={() => navigation.navigate("Signup")} style={styles.signupButton} textStyle={styles.signupText}/>
                 {statusText()}
@@ -97,6 +97,13 @@ const styles = StyleSheet.create({
     statusText: {
         fontWeight: 'bold',
         color: theme.TEXT_WHITE
+    },
+    input: {
+        backgroundColor: theme.DARK_GREY,
+        width: '75%',
+        height: 60,
+        padding: 10,
+        marginVertical: 5,
     }
 
 })
