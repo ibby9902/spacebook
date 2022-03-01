@@ -14,7 +14,7 @@ const UsersFriends = (props) => {
 
 
     const viewProfile = (id) => {
-        props.navigation.push("Profile", {id: id})
+        props.navigation.push("Profile", {id: id, tabProfile: false})
     }
 
     if(isLoading){
