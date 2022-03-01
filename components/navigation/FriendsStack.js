@@ -7,6 +7,7 @@ const Stack = createNativeStackNavigator();
 
 const FriendsStack = ({route}) => {
     return (
+        // set tabProfile: false to allow conditional rendering of the "goBack" button 
         <Stack.Navigator>
             <Stack.Screen name="MyFriends" component={MyFriends} options={{headerShown: false}} initialParams={{id: route.params.id}}/>
             <Stack.Screen name="Friend Requests" component={FriendRequests} />
