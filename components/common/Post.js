@@ -4,9 +4,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import getId from '../../functions/getId';
 import likePost from '../../functions/requests/likePost';
 import unlikePost from '../../functions/requests/unlikePost';
+import theme from '../../assets/theme';
 const Post = (props) => {
 
-    const [like, setLike] = useState(false);
+    /* const [like, setLike] = useState(false);
     const [myID, setMyID] = useState(0)
 
     useEffect(() => {
@@ -48,6 +49,12 @@ const Post = (props) => {
         </TouchableOpacity>
         {renderLikeButton()}
         </View>
+    ) */
+
+    return (
+        <View style={styles.postContainer}>
+            <Text>{props.data.text}</Text>
+        </View>
     )
 
     
@@ -56,10 +63,8 @@ const Post = (props) => {
 const styles = StyleSheet.create({
     postContainer: {
         height: 150,
-        width: '100%',
-        backgroundColor: '#181c25',
-        marginVertical: 10,
-        paddingHorizontal: 10,
+        width: '90%',
+        backgroundColor: theme.GREY_BLUE,
     },
     titleText: {
         color: 'white',
