@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {ScrollView, View, FlatList, ActivityIndicator, StyleSheet, Text} from 'react-native';
+import {ScrollView, View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import getAllUserPosts from '../../functions/requests/getAllUserPosts';
 import ProfileHeader from '../common/ProfileHeader'
 import getUserData from '../../functions/requests/getUserData'
@@ -7,6 +7,8 @@ import Post from '../../components/common/Post'
 import MiniPost from '../../components/common/MiniPost'
 import theme from '../../assets/theme';
 import getId from '../../functions/getId';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import CustomActivityIndicator from '../common/CustomActivityIndicator';
 
 const Profile = (props) => {
     const [isPostLoading, setIsPostLoading] = useState(true);
@@ -15,10 +17,11 @@ const Profile = (props) => {
     const [userData, setUserData] = useState({});
     const [myID, setMyID] = useState(0);
     const [isMyProfile, setIsMyProfile] = useState(false);
-
+    const [isTabProfile, setIsTabProfile] = useState(false);
     useEffect(() => {
         getUserData(props.route.params.id, setUserData, setIsUserLoading);
         getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading)
+        setIsTabProfile(props.route.params.tabProfile)
         getId().then((res) => setMyID(parseInt(res)))
         
     },[])
@@ -33,17 +36,30 @@ const Profile = (props) => {
     const onFriendsPress = () => {
         props.navigation.navigate("UsersFriends", {firstName: userData.first_name, id: userData.user_id});
     }
+
+    const backButton = () => {
+        if(!isTabProfile)
+        {
+            return (
+                <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                    <View>
+                        <Ionicons name="arrow-back-outline" size={30} color={theme.TEXT_WHITE}/>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+        
+    }
         
     if(isPostLoading && isUserLoading){
         return(
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.DARK_GREY}}>
-            <ActivityIndicator color={theme.TEXT_WHITE}/>
-            </View>
+            <CustomActivityIndicator/>
         )
     }
     else {
         return (
             <ScrollView style={{backgroundColor: theme.DARK_GREY, flex: 1}}>
+                {backButton()}
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile}
                     onFriendsPress={onFriendsPress}/>
