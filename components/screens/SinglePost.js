@@ -6,12 +6,17 @@ import CustomActivityIndicator from "../../components/common/CustomActivityIndic
 import Post from '../common/Post';
 const SinglePost = (props) => {
 
-    const [post, setPost] = useState({});
+    const [post, setPost] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         // use post_id from props to get a singular post
         getSinglePost(props.route.params.userId,props.route.params.postId, setPost, setIsLoading)
     },[])
+
+    useEffect(() => {
+        if(post !== null)
+            props.navigation.setOptions({title: `${props.author.first_name}'s post`})
+    }, [post])
     if(isLoading){
         return (
             <CustomActivityIndicator/>
