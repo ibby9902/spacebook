@@ -12,8 +12,8 @@ const getSinglePost = async (id, post_id, setPost, setIsLoading) => {
                 return response.json();
         })
         .then((responseJson) => {
-            setIsLoading(false);
             setPost(responseJson);
+            setIsLoading(false);
         })
         .catch((error) => {
             console.log(error)
