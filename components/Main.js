@@ -9,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import getToken from '../functions/getToken'
 import FriendRequests from './screens/FriendRequests';
 import theme from '../assets/theme';
+import CustomActivityIndicator from './common/CustomActivityIndicator';
 const Tab = createBottomTabNavigator();
 
 
@@ -53,9 +54,7 @@ const Main = () => {
 
         } else {
             return(
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.DARK_GREY}}>
-                    <ActivityIndicator color={theme.TEXT_WHITE}/>
-                </View>
+                <CustomActivityIndicator/>
             )
         }
     
