@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const MiniPost = (props) => {
     return (
-        <TouchableOpacity onPress={() => console.log("Minipost clicked")} style={styles.container}>
+        <TouchableOpacity onPress={props.moveToSinglePost} style={styles.container}>
             <View style={{flex: 1, alignItems: 'center'}}>
             <View style={{ width: '90%', borderBottomColor: theme.TEXT_LESS_WHITE, borderBottomWidth: 1}}>
                 <Text style={styles.nameText}>{props.data.author.first_name} <Text style={styles.nameText}>{props.data.author.last_name}</Text></Text>
