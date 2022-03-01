@@ -68,7 +68,7 @@ const Profile = (props) => {
                     </View>
                     <View style={styles.postContainer}>
                         <FlatList data={postData} renderItem={({item}) => 
-                            <MiniPost data={item}/> } keyExtractor={({post_id}, index) => post_id}/>
+                            <MiniPost moveToSinglePost={() => props.navigation.navigate("SinglePost", {userId: item.author.user_id ,postId: item.post_id})} data={item}/> } keyExtractor={({post_id}, index) => post_id}/>
                     </View>
 
                 </View>
