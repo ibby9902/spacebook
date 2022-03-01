@@ -9,6 +9,7 @@ import theme from '../../assets/theme';
 import getId from '../../functions/getId';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import CustomActivityIndicator from '../common/CustomActivityIndicator';
+import CustomButton from '../common/CustomButton';
 
 const Profile = (props) => {
     const [isPostLoading, setIsPostLoading] = useState(true);
@@ -65,6 +66,7 @@ const Profile = (props) => {
                     onFriendsPress={onFriendsPress}/>
                     <View style={styles.postHeader}>
                         <Text style={{color: theme.TEXT_WHITE, fontSize: 15, fontWeight: 'bold'}}>Posts</Text>
+                        <CustomButton text={"Add Post"} style={styles.addPostButton} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
                     </View>
                     <View style={styles.postContainer}>
                         <FlatList data={postData} renderItem={({item}) => 
@@ -89,10 +91,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     postHeader: {
+        flexDirection: 'row',
         width: '80%',
         borderBottomWidth: 1,
         borderColor: theme.TEXT_LESS_WHITE,
         paddingBottom: 10,
+        alignItems: 'center'
+    },
+    addPostButton: {
+        height: 30,
+        width: '20%',
+        backgroundColor: theme.YELLOW,
+        marginLeft: 10,
     }
 })
 
