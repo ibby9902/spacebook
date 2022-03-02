@@ -11,7 +11,7 @@ const FriendsStack = ({route}) => {
         <Stack.Navigator>
             <Stack.Screen name="MyFriends" component={MyFriends} options={{headerShown: false}} initialParams={{id: route.params.id}}/>
             <Stack.Screen name="Friend Requests" component={FriendRequests} />
-            <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} initialParams={{tabProfile: false}}/>
+            <Stack.Screen name="FriendsProfile" component={Profile} options={{headerShown: false}} initialParams={{tabProfile: false}}/>
         </Stack.Navigator>
     )
 }

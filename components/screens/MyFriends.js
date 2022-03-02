@@ -15,7 +15,7 @@ const MyFriends = (props) => {
     
     // pass this function to Friends as a prop, they can call it on button press
     const viewProfile = (id) => {
-        props.navigation.navigate("Profile", {id: id,tabProfile: false})
+        props.navigation.navigate("FriendsProfile", {id: id,tabProfile: false})
     }
 
     if(isLoading)
