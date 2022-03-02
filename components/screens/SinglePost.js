@@ -15,7 +15,7 @@ const SinglePost = (props) => {
 
     useEffect(() => {
         if(post !== null)
-            props.navigation.setOptions({title: `${props.author.first_name}'s post`})
+            props.navigation.setOptions({title: `${post.author.first_name}'s post`})
     }, [post])
     if(isLoading){
         return (
