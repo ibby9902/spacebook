@@ -10,6 +10,7 @@ import getToken from '../functions/getToken'
 import FriendRequests from './screens/FriendRequests';
 import theme from '../assets/theme';
 import CustomActivityIndicator from './common/CustomActivityIndicator';
+import Settings from './screens/Settings';
 const Tab = createBottomTabNavigator();
 
 
@@ -42,6 +43,9 @@ const Main = () => {
                         } else if(route.name === 'Friends'){
                             iconName = 'people-outline'
                             color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
+                        } else if (route.name === 'Settings'){
+                            iconName = 'cog'
+                            color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
                         }
                         return <Ionicons name={iconName} size={size} color={color}/>
                     },
@@ -49,6 +53,7 @@ const Main = () => {
                     <Tab.Screen name="ProfileStack" component={ProfileStack} options={{headerShown: false}} initialParams={{id: id}}/>
                     <Tab.Screen name="Search" component={Search} options={{headerShown: false}}/>
                     <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false, unmountOnBlur: true}} initialParams={{id: id}}/>
+                    <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
                 </Tab.Navigator>
             )
 
