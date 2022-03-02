@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import theme from '../../assets/theme';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import formatTimestamp from '../../functions/formatTimestamp';
 
 const MiniPost = (props) => {
     return (
@@ -9,7 +9,7 @@ const MiniPost = (props) => {
             <View style={{flex: 1, alignItems: 'center'}}>
             <View style={{ width: '90%', borderBottomColor: theme.TEXT_LESS_WHITE, borderBottomWidth: 1}}>
                 <Text style={styles.nameText}>{props.data.author.first_name} <Text style={styles.nameText}>{props.data.author.last_name}</Text></Text>
-                <Text style={styles.data}>{props.data.timestamp}</Text>
+                <Text style={styles.data}>{formatTimestamp(props.data.timestamp)}</Text>
             </View>
             <View style={{width: '90%', flexDirection: 'row-reverse'}}>
                 <Text style={styles.likeText}>Likes: {props.data.numLikes}</Text>
