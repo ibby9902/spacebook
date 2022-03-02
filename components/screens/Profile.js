@@ -66,7 +66,7 @@ const Profile = (props) => {
                     onFriendsPress={onFriendsPress}/>
                     <View style={styles.postHeader}>
                         <Text style={{color: theme.TEXT_WHITE, fontSize: 15, fontWeight: 'bold'}}>Posts</Text>
-                        <CustomButton onClick={() => props.navigation.navigate("AddNewPost")} 
+                        <CustomButton onClick={() => props.navigation.navigate("AddNewPost", {user_id: props.route.params.id})} 
                         text={"Add Post"} style={styles.addPostButton} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
                     </View>
                     <View style={styles.postContainer}>
