@@ -6,31 +6,53 @@ import likePost from '../../functions/requests/likePost';
 import unlikePost from '../../functions/requests/unlikePost';
 import theme from '../../assets/theme';
 import formatTimestamp from '../../functions/formatTimestamp';
+import CustomButton from './CustomButton';
+import deletePost from '../../functions/requests/deletePost';
 const Post = (props) => {
 
     const [like, setLike] = useState(false);
     const [myID, setMyID] = useState(0)
-    
+    const [isMyPost, setIsMyPost] = useState(false);
+    const [yourPostError, setYourPostError] = useState(false);
     useEffect(() => {
-        getId().then((res) => setMyID(parseInt(res)))
+        getId().then((id) => {
+            setMyID(parseInt(id))
+            if(props.data.author.user_id === parseInt(id))
+                setIsMyPost(true);
+        })
     },[]) 
     
-    const handleLikePost = async () => {
-        
-        if(props.data.author.user_id === myID){
-            console.log("You cannot like your own post");
-        }
-        else {
-            const likeStatus = !like;
-            setLike(likeStatus)
-            if(likeStatus){
-                likePost(props.data.author.user_id, props.data.post_id)   
-            }
-            else {
-                unlikePost(props.data.author.user_id, props.data.post_id)
-            }
+    const handleLikePost = () => {
+        if(!isMyPost)
+            likePost(props.data.author.user_id, props.data.post_id)
+        else 
+            setYourPostError(true);
+    }
+
+    const handleUnlikePost = () => {
+        if(!isMyPost)
+            unlikePost(props.data.author.user_id, props.data.post_id)
+        else 
+            setYourPostError(true);
+    }
+
+    const handleEdit = () => {
+        props.moveToEditPost();
+    }
+
+    const handleDelete = () => {
+        deletePost();
+    }
+
+    const statusText = () => {
+        if(yourPostError) {
+            return (
+                <Text style={{color: theme.TEXT_LESS_WHITE}}>Cannot like/unlike your own post!</Text>
+            )
         }
     }
+
+    
     return (
         <View style={styles.postContainer}>
             <View>
@@ -42,14 +64,13 @@ const Post = (props) => {
             </View>
 
             <View style={styles.bottomContainer}>
-                <TouchableOpacity onPress={handleLikePost} style={{paddingRight: 10}} >
-                    <Ionicons name={like ? "thumbs-up" : "thumbs-up-outline"} color={like ? 'red' : theme.TEXT_WHITE} size={30}/><Text style={styles.postText}>Like</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Ionicons name="pencil" color={theme.TEXT_WHITE} size={30}/><Text style={styles.postText}>Edit</Text>
-                </TouchableOpacity>
+                <CustomButton text="Like" style={styles.likeButton} onClick={handleLikePost}/>
+                <CustomButton text="Unlike" style={styles.unlikeButton} onClick={handleUnlikePost}/>
+                <CustomButton text="Edit" style={styles.editButton} onClick={handleEdit}/>
+                <CustomButton text="Delete" style={styles.deleteButton} onClick={handleDelete}/>
                 <Text style={styles.likeCounter}>Likes: {props.data.numLikes}</Text>
             </View>
+            {statusText()}
         </View>
     )
 
@@ -58,8 +79,8 @@ const Post = (props) => {
 
 const styles = StyleSheet.create({
     postContainer: {
-        height: 150,
-        width: '90%',
+        height: 200,
+        width: '95%',
         backgroundColor: theme.GREY_BLUE,
         padding: 10,
     },
@@ -79,16 +100,49 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     bottomContainer: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginTop: 10,
-        alignItems: 'center'
+        marginTop: 30,
+        alignItems: 'center',
+        flexWrap: 'wrap'
     },
     likeCounter: {
         color: theme.TEXT_WHITE,
         fontWeight: 'bold', 
         size: 15
-    }
+    },
+    likeButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        height: 30,
+        backgroundColor: theme.ICON_INACTIVE,
+        
+    },
+    editButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        height: 30,
+        backgroundColor: theme.ICON_INACTIVE
+    },
+    unlikeButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        height: 30,
+        backgroundColor: theme.ICON_INACTIVE,
+        paddingRight: 10
+    },
+    deleteButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        height: 30,
+        backgroundColor: theme.ICON_INACTIVE,
+        paddingRight: 10
+    },
 });
 
 export default Post;
