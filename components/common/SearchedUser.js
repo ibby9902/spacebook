@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import theme from '../../assets/theme';
 import CustomButton from './CustomButton';
 import checkIfFriendsWith from '../../functions/checkIfFriendsWith';
+import sendFriendRequest from '../../functions/requests/sendFriendRequest'
 const SearchedUser = ({firstName, lastName, id, myID, friends}) => {
 
     const [isFriendsWith, setIsFriendsWith] = useState(false);
@@ -12,7 +13,7 @@ const SearchedUser = ({firstName, lastName, id, myID, friends}) => {
         
     },[])
     const handleAdd = () => {
-        console.log("Friend Request sent!")
+        sendFriendRequest(id);
     }
     const renderButton = () => {
         if(!isFriendsWith)
