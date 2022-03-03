@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     view: {
         width: 80,
         height: 40,
-        backgroundColor: 'red',
+        backgroundColor: theme.YELLOW,
     }
 })
 
