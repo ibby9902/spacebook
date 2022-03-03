@@ -3,11 +3,11 @@ import { View, StyleSheet } from 'react-native';
 import CustomButton from '../common/CustomButton';
 import theme from '../../assets/theme';
 import logout from '../../functions/requests/logout';
-const Settings = () => {
+const Settings = (props) => {
 
     return (
         <View style={styles.container}>
-            <CustomButton text="Logout" onClick={logout} style={styles.logout}/>
+            <CustomButton text="Logout" onClick={() => logout(props.route.params.nav)} style={styles.logout}/>
         </View>
     )
 }
