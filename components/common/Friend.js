@@ -4,6 +4,11 @@ import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const Friend = (props) => {
+
+    const viewProfile = () => {
+        props.navigation.navigate("FriendsProfile", {id: props.id,tabProfile: false})
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.icon}>
@@ -11,7 +16,7 @@ const Friend = (props) => {
             </View>
             <View style={styles.content}>
                 <Text style={styles.nameText}>{props.firstName} <Text style={styles.nameText}>{props.lastName}</Text></Text>
-                <CustomButton text='View Profile' style={styles.viewProfile} onClick={() => props.viewProfile(props.id)} textStyle={styles.btnText}/>
+                <CustomButton text='View Profile' style={styles.viewProfile} onClick={viewProfile} textStyle={styles.btnText}/>
             </View>
         </View>
     )

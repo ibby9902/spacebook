@@ -4,17 +4,21 @@ import theme from '../../assets/theme';
 import CustomButton from './CustomButton';
 import checkIfFriendsWith from '../../functions/checkIfFriendsWith';
 import sendFriendRequest from '../../functions/requests/sendFriendRequest'
-const SearchedUser = ({firstName, lastName, id, myID, friends}) => {
+const SearchedUser = ({firstName, lastName, id, myID, friends, navigation}) => {
 
     const [isFriendsWith, setIsFriendsWith] = useState(false);
 
     useEffect(() => {
         checkIfFriendsWith(id, friends, setIsFriendsWith, myID);
-        
     },[])
     const handleAdd = () => {
         sendFriendRequest(id);
     }
+
+    const viewProfile = () => {
+        navigation.push("Profile", {id: id,tabProfile: false});
+    }
+
     const renderButton = () => {
         if(!isFriendsWith)
         {
@@ -24,7 +28,7 @@ const SearchedUser = ({firstName, lastName, id, myID, friends}) => {
         }
         else {
             return (
-                <CustomButton text="View Profile" onClick={() => console.log("View profile")} style={styles.view} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
+                <CustomButton text="View Profile" onClick={(viewProfile)} style={styles.view} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
             )
         }
     }
