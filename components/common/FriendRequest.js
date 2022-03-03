@@ -5,16 +5,14 @@ import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
 import acceptFriend from '../../functions/requests/acceptFriend';
 import rejectFriend from '../../functions/requests/rejectFriend';
-import removeFriendRequest from '../../functions/removeFriendRequest'
+
 const FriendRequest = (props) => {
     
     const handleAccept = () => {
         acceptFriend(props.id)
-        removeFriendRequest(props.data, props.id)
     }
     const handleReject = () => {
         rejectFriend(props.id)
-        removeFriendRequest(props.data, props.id)
     }
 
     return (
