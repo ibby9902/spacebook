@@ -34,9 +34,7 @@ const Profile = (props) => {
             setIsMyProfile(false)
     }, [myID])
 
-    const onFriendsPress = () => {
-        props.navigation.navigate("UsersFriends", {firstName: userData.first_name, id: userData.user_id});
-    }
+    
 
     const backButton = () => {
         if(!isTabProfile)
@@ -62,8 +60,8 @@ const Profile = (props) => {
             <ScrollView style={{backgroundColor: theme.DARK_GREY, flex: 1}}>
                 {backButton()}
                 <View style={{flex: 1, alignItems: 'center'}}>
-                    <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile}
-                    onFriendsPress={onFriendsPress}/>
+                    <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile} id={userData.user_id}
+                    navigation={props.navigation}/>
                     <View style={styles.postHeader}>
                         <Text style={{color: theme.TEXT_WHITE, fontSize: 15, fontWeight: 'bold'}}>Posts</Text>
                         <CustomButton onClick={() => props.navigation.navigate("AddNewPost", {user_id: props.route.params.id})} 
