@@ -7,7 +7,7 @@ import CustomButton from '../common/CustomButton'
 import SearchedUser from '../common/SearchedUser'
 import getId from '../../functions/getId';
 import getFriends from '../../functions/requests/getFriends';
-const Search = () => {
+const Search = (props) => {
 
     const [query, setQuery] = useState('');
     const [isSelected, setSelection] = useState(false);
@@ -32,8 +32,8 @@ const Search = () => {
 
     const renderUsers = () => {
         return (
-            <FlatList data={users} renderItem={({item}) => <SearchedUser firstName={item.user_givenname} lastName={item.user_familyname} id={item.user_id} myID={myID}
-            friends={friends}/>}
+            <FlatList data={users} renderItem={({item}) => <SearchedUser firstName={item.user_givenname}
+             lastName={item.user_familyname} id={item.user_id} myID={myID} friends={friends} navigation={props.navigation} />}
             keyExtractor={({user_id}, index) => user_id}/>
         )
     }
