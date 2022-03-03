@@ -12,7 +12,8 @@ const getFriends = async (id, setIsLoading, setFriends) => {
                 return response.json();
         })
         .then((responseJson) => {
-            setIsLoading(false);
+            if(setIsLoading !== null)
+                setIsLoading(false);
             setFriends(responseJson);
         })
         .catch((error) => {
