@@ -13,10 +13,7 @@ const MyFriends = (props) => {
         getFriends(props.route.params.id, setIsLoading, setFriends);
     }, [])
     
-    // pass this function to Friends as a prop, they can call it on button press
-    const viewProfile = (id) => {
-        props.navigation.navigate("FriendsProfile", {id: id,tabProfile: false})
-    }
+    
 
     if(isLoading)
     {
@@ -38,7 +35,7 @@ const MyFriends = (props) => {
                     </View>
                 </View>
                 <FlatList data={friends} renderItem={({item}) => <Friend firstName={item.user_givenname} lastName={item.user_familyname} id={item.user_id} state_data={friends}
-                viewProfile={viewProfile}/>}
+                navigation={props.navigation}/>}
                 keyExtractor={({user_id}, index) => user_id}/>
             </ScrollView>
         )
