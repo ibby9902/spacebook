@@ -14,6 +14,7 @@ const Post = (props) => {
     const [myID, setMyID] = useState(0)
     const [isMyPost, setIsMyPost] = useState(false);
     const [yourPostError, setYourPostError] = useState(false);
+    const [likeError, setLikeError] = useState(false);
     useEffect(() => {
         getId().then((id) => {
             setMyID(parseInt(id))
@@ -23,17 +24,26 @@ const Post = (props) => {
     },[]) 
     
     const handleLikePost = () => {
-        if(!isMyPost)
-            likePost(props.data.author.user_id, props.data.post_id)
-        else 
-            setYourPostError(true);
+        if(!likeError)
+        {
+            if(!isMyPost)
+                likePost(props.data.author.user_id, props.data.post_id, setLikeError)
+            else {
+                setYourPostError(true);
+            }
+        } 
     }
 
     const handleUnlikePost = () => {
-        if(!isMyPost)
-            unlikePost(props.data.author.user_id, props.data.post_id)
-        else 
-            setYourPostError(true);
+        if(!likeError)
+        {
+            if(!isMyPost)
+                unlikePost(props.data.author.user_id, props.data.post_id, setLikeError)
+            else {
+                setYourPostError(true);
+            }
+        } 
+            
     }
 
     const handleEdit = () => {
@@ -44,10 +54,17 @@ const Post = (props) => {
         deletePost();
     }
 
-    const statusText = () => {
+    const renderYourPostError = () => {
         if(yourPostError) {
             return (
                 <Text style={{color: theme.TEXT_LESS_WHITE}}>Cannot like/unlike your own post!</Text>
+            )
+        }
+    }
+    const renderLikeError = () => {
+        if(likeError) {
+            return (
+                <Text style={{color: theme.TEXT_LESS_WHITE}}>You have already like/unliked this post!</Text>
             )
         }
     }
@@ -70,7 +87,8 @@ const Post = (props) => {
                 <CustomButton text="Delete" style={styles.deleteButton} onClick={handleDelete}/>
                 <Text style={styles.likeCounter}>Likes: {props.data.numLikes}</Text>
             </View>
-            {statusText()}
+            {renderYourPostError()}
+            {renderLikeError()}
         </View>
     )
 
