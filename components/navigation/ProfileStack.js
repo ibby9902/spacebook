@@ -3,6 +3,7 @@ import Profile from '../screens/Profile'
 import UsersFriends from '../screens/UsersFriends';
 import SinglePost from '../screens/SinglePost';
 import AddNewPost from '../screens/AddNewPost';
+import EditPost from '../screens/EditPost';
 const Stack = createNativeStackNavigator();
 
 const ProfileStack = ({route}) => {
@@ -13,6 +14,7 @@ const ProfileStack = ({route}) => {
                         <Stack.Screen name="UsersFriends" component={UsersFriends} initialParams={{id: route.params.id, tabProfile: false}}/>
                         <Stack.Screen name="SinglePost" component={SinglePost} />
                         <Stack.Screen name="AddNewPost" component={AddNewPost}/>
+                        <Stack.Screen name="EditPost" component={EditPost}/>
                         {/* <Stack.Screen name="SinglePost" component={Signup}/> A whole screen for a single post??*/}
                         {/* Profile stack screen here? So we can click friends on the friends list to show their profile? */} 
         </Stack.Navigator>

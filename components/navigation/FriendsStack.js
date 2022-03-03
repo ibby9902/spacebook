@@ -4,7 +4,7 @@ import MyFriends from '../screens/MyFriends';
 import FriendRequests from '../screens/FriendRequests';
 import SinglePost from '../screens/SinglePost';
 import Profile from '../screens/Profile';
-
+import EditPost from '../screens/EditPost';
 const Stack = createNativeStackNavigator();
 
 const FriendsStack = ({route}) => {
@@ -15,6 +15,7 @@ const FriendsStack = ({route}) => {
             <Stack.Screen name="Friend Requests" component={FriendRequests} />
             <Stack.Screen name="FriendsProfile" component={Profile} options={{headerShown: false}} initialParams={{tabProfile: false}}/>
             <Stack.Screen name="SinglePost" component={SinglePost} />
+            <Stack.Screen name="EditPost" component={EditPost}/>
         </Stack.Navigator>
     )
 }
