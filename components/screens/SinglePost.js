@@ -17,6 +17,11 @@ const SinglePost = (props) => {
         if(post !== null)
             props.navigation.setOptions({title: `${post.author.first_name}'s post`})
     }, [post])
+
+    const moveToEditPost = () => {
+        props.navigation.navigate("EditPost")
+    }
+
     if(isLoading){
         return (
             <CustomActivityIndicator/>
@@ -26,10 +31,12 @@ const SinglePost = (props) => {
         return (
             
             <View style={styles.container}>
-                <Post data={post}/>
+                <Post data={post} moveToEditPost={moveToEditPost}/>
             </View>
         )
     }
+
+    
 }
 
 const styles = StyleSheet.create({
