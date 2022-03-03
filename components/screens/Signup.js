@@ -6,6 +6,7 @@ import validatePassword from '../../functions/validatePassword';
 import CustomInput from '../common/CustomInput';
 import CustomButton from '../common/CustomButton';
 import theme from '../../assets/theme'
+
 const Signup = () => {
 
     const [firstName, setFirstName] = useState('');
@@ -63,26 +64,26 @@ const Signup = () => {
         else if(errorOnSignup)
             return <Text style={styles.text}>Something went wrong</Text>
     }
-        return(
-            <View style={styles.container}>
-                <View style={styles.imageContainer}>
-                    <Image source={require('../../assets/logo.png')} style={styles.image}/>
-                </View>
-                <View style={styles.formContainer}>
-                    <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)} styles={styles.input}/>
-                    <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)} styles={styles.input}/>
-                    <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} styles={styles.input}/>
-                    <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} styles={styles.input}/>
-                    <CustomButton text="Sign up" onClick={handleSignUp} style={styles.signupButton} textStyle={styles.signupText}/>
-                </View>
-                <View style={{flex:1,justifyContent: 'center', alignItems:'center',}}>
-                    {statusText()}
-                    {showEmailErrorText()}
-                    {showPasswordErrorText()}
-
-                </View>
+    return(
+        <View style={styles.container}>
+            <View style={styles.imageContainer}>
+                <Image source={require('../../assets/logo.png')} style={styles.image}/>
             </View>
-        );
+            <View style={styles.formContainer}>
+                <CustomInput placeholder="First name" setValue={(val) => setFirstName(val)} styles={styles.input}/>
+                <CustomInput placeholder="Last name" setValue={(val) => setLastName(val)} styles={styles.input}/>
+                <CustomInput placeholder="Email" setValue={(val) => setEmail(val)} styles={styles.input}/>
+                <CustomInput placeholder="Password" setValue={(val) => setPassword(val)} secureEntry={true} styles={styles.input}/>
+                <CustomButton text="Sign up" onClick={handleSignUp} style={styles.signupButton} textStyle={styles.signupText}/>
+            </View>
+            <View style={{flex: 1,justifyContent: 'center', alignItems:'center'}}>
+                {statusText()}
+                {showEmailErrorText()}
+                {showPasswordErrorText()}
+
+            </View>
+        </View>
+    );   
     
 }
 
@@ -114,9 +115,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     formContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     image: {
         marginTop: 20,
