@@ -54,7 +54,7 @@ const Main = (props) => {
                     <Tab.Screen name="SearchStack" component={SearchStack} options={{headerShown: false}}/>
                     <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false, unmountOnBlur: true}} initialParams={{id: id}}/>
                     {/* pass a function that navigates to login to the settings screen as a param (to be used to logout) */}
-                    <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}} initialParams={{nav: ()=>props.navigation.navigate("Login")}}/>
+                    <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}} initialParams={{navigation: props.navigation}}/>
                 </Tab.Navigator>
             )
 
