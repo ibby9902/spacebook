@@ -10,7 +10,7 @@ import getToken from '../functions/getToken'
 import FriendRequests from './screens/FriendRequests';
 import theme from '../assets/theme';
 import CustomActivityIndicator from './common/CustomActivityIndicator';
-import Settings from './screens/Settings';
+import SettingsStack from './navigation/SettingsStack';
 const Tab = createBottomTabNavigator();
 
 
@@ -43,7 +43,7 @@ const Main = (props) => {
                         } else if(route.name === 'Friends'){
                             iconName = 'people-outline'
                             color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
-                        } else if (route.name === 'Settings'){
+                        } else if (route.name === 'SettingsStack'){
                             iconName = 'cog'
                             color = focused ? theme.TEXT_WHITE : theme.TEXT_GREY
                         }
@@ -54,7 +54,7 @@ const Main = (props) => {
                     <Tab.Screen name="SearchStack" component={SearchStack} options={{headerShown: false}}/>
                     <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false, unmountOnBlur: true}} initialParams={{id: id}}/>
                     {/* pass a function that navigates to login to the settings screen as a param (to be used to logout) */}
-                    <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}} initialParams={{navigation: props.navigation}}/>
+                    <Tab.Screen name="SettingsStack" component={SettingsStack} options={{headerShown: false}} initialParams={{navigation: props.navigation}}/>
                 </Tab.Navigator>
             )
 
