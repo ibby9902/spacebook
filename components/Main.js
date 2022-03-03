@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 
 
 
-const Main = () => {
+const Main = (props) => {
     const [id, setId] = useState(0);
     // get our id on first mount so we can pass it to Profile
     useState(() => {
@@ -53,7 +53,8 @@ const Main = () => {
                     <Tab.Screen name="ProfileStack" component={ProfileStack} options={{headerShown: false}} initialParams={{id: id}}/>
                     <Tab.Screen name="SearchStack" component={SearchStack} options={{headerShown: false}}/>
                     <Tab.Screen name="Friends" component={FriendsStack} options={{headerShown: false, unmountOnBlur: true}} initialParams={{id: id}}/>
-                    <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
+                    {/* pass a function that navigates to login to the settings screen as a param (to be used to logout) */}
+                    <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}} initialParams={{nav: ()=>props.navigation.navigate("Login")}}/>
                 </Tab.Navigator>
             )
 
