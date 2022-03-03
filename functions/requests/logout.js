@@ -1,6 +1,9 @@
-const logout = () => {
-    // remove id & token from async storage
-    // navigate to Login
+import removeId from '../removeId';
+import removeToken from '../removeToken';
+const logout = (nav) => {
+    removeId();
+    removeToken();
+    nav()
 }
 
 export default logout;
