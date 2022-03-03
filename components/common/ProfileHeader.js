@@ -3,7 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
 const ProfileHeader = (props) => {
-
+    const onFriendsPress = () => {
+        props.navigation.push("UsersFriends", {firstName: props.firstName, id: props.id});
+    }
     return(
         <View style={styles.profileHeader}>
             <TouchableOpacity style={styles.imageContainer}/>
@@ -12,7 +14,7 @@ const ProfileHeader = (props) => {
                     <Text style={styles.name}>{props.firstName} <Text style={styles.name}>{props.lastName}</Text></Text>
                 </View>
                 <CustomButton text={`Friends: ${props.friendCount}`} style={styles.friendsButton} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}
-                onClick={props.onFriendsPress}/>
+                onClick={onFriendsPress}/>
             </View>
             
         </View>
