@@ -14,6 +14,7 @@ const ProfileStack = ({route}) => {
                         {/*a whole screen with a list of friends? */}
                         <Stack.Screen name="UsersFriends" component={UsersFriends} initialParams={{id: route.params.id, tabProfile: false}}/>
                         <Stack.Screen name="SinglePost" component={SinglePost} />
+                        <Stack.Screen name="FriendsProfile" component={Profile} options={{headerShown: false}}/>
                         <Stack.Screen name="AddNewPost" component={AddNewPost}/>
                         <Stack.Screen name="EditPost" component={EditPost}/>
                         <Stack.Screen name="Drafts" component={Drafts}/>
