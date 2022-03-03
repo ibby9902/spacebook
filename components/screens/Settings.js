@@ -7,7 +7,7 @@ const Settings = (props) => {
 
     return (
         <View style={styles.container}>
-            <CustomButton text="Logout" onClick={() => logout(props.route.params.nav)} style={styles.logout}/>
+            <CustomButton text="Logout" onClick={() => logout(props.route.params.navigation)} style={styles.logout}/>
         </View>
     )
 }
