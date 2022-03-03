@@ -9,7 +9,7 @@ const SearchStack = ({route}) => {
         // set tabProfile: false to allow conditional rendering of the "goBack" button 
         <Stack.Navigator>
             <Stack.Screen name="Search" component={Search} options={{headerShown: false}}/>
-            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }
