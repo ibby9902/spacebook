@@ -13,10 +13,6 @@ const UsersFriends = (props) => {
     }, [])
 
 
-    const viewProfile = (id) => {
-        props.navigation.push("Profile", {id: id, tabProfile: false})
-    }
-
     if(isLoading){
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.DARK_GREY}}>
@@ -28,7 +24,7 @@ const UsersFriends = (props) => {
         return (
             <ScrollView style={{backgroundColor: theme.DARK_GREY, flex: 1}}>
                 <FlatList data={friends} renderItem={({item}) => <Friend firstName={item.user_givenname} lastName={item.user_familyname} id={item.user_id} state_data={friends}
-                viewProfile={viewProfile}/>}
+                navigation={props.navigation}/>}
                 keyExtractor={({user_id}, index) => user_id}/>
             </ScrollView>
         )
