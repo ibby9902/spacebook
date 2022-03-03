@@ -1,9 +1,12 @@
+import { NavigationContainer } from '@react-navigation/native';
 import removeId from '../removeId';
 import removeToken from '../removeToken';
-const logout = (nav) => {
+// removes ID & token from async storage
+// uses Main navigation to navigate to Login
+const logout = (navigation) => {
     removeId();
     removeToken();
-    nav()
+    navigation.navigate("Login");
 }
 
 export default logout;
