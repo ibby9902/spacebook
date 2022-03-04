@@ -3,14 +3,13 @@ import {ScrollView, View, FlatList, StyleSheet, Text, TouchableOpacity} from 're
 import getAllUserPosts from '../../functions/requests/getAllUserPosts';
 import ProfileHeader from '../common/ProfileHeader'
 import getUserData from '../../functions/requests/getUserData'
-import Post from '../../components/common/Post'
 import MiniPost from '../../components/common/MiniPost'
 import theme from '../../assets/theme';
 import getId from '../../functions/getId';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import CustomActivityIndicator from '../common/CustomActivityIndicator';
 import CustomButton from '../common/CustomButton';
-
+import getProfilePhoto from '../../functions/requests/getProfilePhoto';
 const Profile = (props) => {
     const [isPostLoading, setIsPostLoading] = useState(true);
     const [isUserLoading, setIsUserLoading] = useState(true);
@@ -19,12 +18,13 @@ const Profile = (props) => {
     const [myID, setMyID] = useState(0);
     const [isMyProfile, setIsMyProfile] = useState(false);
     const [isTabProfile, setIsTabProfile] = useState(false);
+    const [photo, setPhoto] = useState('');
     useEffect(() => {
         getUserData(props.route.params.id, setUserData, setIsUserLoading);
         getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading)
         setIsTabProfile(props.route.params.tabProfile)
         getId().then((res) => setMyID(parseInt(res)))
-        
+        getProfilePhoto(props.route.params.id, setPhoto);
     },[])
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const Profile = (props) => {
                 {backButton()}
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <ProfileHeader firstName={userData.first_name} lastName={userData.last_name} friendCount={userData.friend_count} isMyProfile={isMyProfile} id={userData.user_id}
-                    navigation={props.navigation}/>
+                    navigation={props.navigation} photo={photo}/>
                     <View style={styles.postHeader}>
                         <Text style={{color: theme.TEXT_WHITE, fontSize: 15, fontWeight: 'bold'}}>Posts</Text>
                         <CustomButton onClick={() => props.navigation.navigate("AddNewPost", {user_id: props.route.params.id})} 
