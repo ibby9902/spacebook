@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import getToken from '../../functions/getToken';
 import CustomButton from './CustomButton';
@@ -7,12 +7,32 @@ import acceptFriend from '../../functions/requests/acceptFriend';
 import rejectFriend from '../../functions/requests/rejectFriend';
 
 const FriendRequest = (props) => {
+
+    const [hasAcceptedOrRejected, setAcceptedOrRejected] = useState(false);
     
     const handleAccept = () => {
-        acceptFriend(props.id)
+        acceptFriend(props.id, setAcceptedOrRejected)
     }
     const handleReject = () => {
-        rejectFriend(props.id)
+        rejectFriend(props.id, setAcceptedOrRejected)
+    }
+
+    const renderButtons = () => {
+        if(hasAcceptedOrRejected) {
+           return (
+            <View style={styles.buttonContainer}>
+                <Text style={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}>Done!</Text>
+            </View>
+           )
+        }
+        else {
+            return (
+                <View style={styles.buttonContainer}>
+                    <CustomButton text='Accept' style={styles.accept} onClick={handleAccept} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
+                    <CustomButton text='Reject' style={styles.reject} onClick={handleReject} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
+                </View>
+            )
+        }
     }
 
     return (
@@ -20,11 +40,8 @@ const FriendRequest = (props) => {
             <View style={styles.textContainer}>
                 <Text style={styles.nameText}>{props.firstName} <Text style={styles.nameText}>{props.lastName}</Text></Text>
             </View>
-            <View style={styles.buttonContainer}>
-                <CustomButton text='Accept' style={styles.accept} onClick={handleAccept} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
-                <CustomButton text='Reject' style={styles.reject} onClick={handleReject} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
-
-            </View>   
+            {renderButtons()}
+               
         </View>
     )    
 }   
