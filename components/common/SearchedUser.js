@@ -7,12 +7,13 @@ import sendFriendRequest from '../../functions/requests/sendFriendRequest'
 const SearchedUser = ({firstName, lastName, id, myID, friends, navigation}) => {
 
     const [isFriendsWith, setIsFriendsWith] = useState(false);
+    const [friendRequestSent, setFriendRequestSent] = useState(false);
 
     useEffect(() => {
         checkIfFriendsWith(id, friends, setIsFriendsWith, myID);
     },[])
     const handleAdd = () => {
-        sendFriendRequest(id);
+        sendFriendRequest(id, setFriendRequestSent);
     }
 
     const viewProfile = () => {
@@ -23,7 +24,7 @@ const SearchedUser = ({firstName, lastName, id, myID, friends, navigation}) => {
         if(!isFriendsWith)
         {
             return (
-                <CustomButton text="Add" onClick={handleAdd} style={styles.add} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>  
+                <CustomButton text={friendRequestSent ? "Sent!" : "Add"} onClick={handleAdd} style={styles.add} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>  
             )
         }
         else {
