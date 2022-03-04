@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import theme from '../../assets/theme'
 import CustomButton from '../common/CustomButton';
 import CustomInput from '../common/CustomInput';
@@ -12,7 +12,7 @@ const AddNewPost = (props) => {
     useEffect(() => {
         props.navigation.setOptions({title: "Add a new post!" })
         
-    })
+    },[])
 
     const handleAddPost = () => {
         if(postText !== '')
@@ -22,12 +22,23 @@ const AddNewPost = (props) => {
     const handleDraft = () => {
         appendDraft(postText);
     }
+
+    const renderPostSentText = () => {
+        if(postSent) {
+            return (
+                <Text style={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}>Post successfully sent!</Text>
+            )
+        } else if(postError) {
+            <Text style={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}>Error posting</Text>
+        }
+    }
     return (
         <View style={styles.container}>
             <CustomButton text="View Drafts" style={styles.viewDrafts} onClick={() => props.navigation.navigate("Drafts")}/>
             <CustomInput multiline={true} setValue={onChangePostText} value={postText} placeholder={"What's happening?"} styles={styles.input}/>
             <CustomButton text="Send Post" style={styles.button} textStyle={{color: theme.TEXT_WHITE}} onClick={handleAddPost}/>
             <CustomButton text="Save Post as draft" style={styles.draft} textStyle={{color: theme.TEXT_WHITE}} onClick={handleDraft} />
+            {renderPostSentText()}
         </View>
     )
 }
