@@ -1,6 +1,6 @@
 import getToken from '../../functions/getToken';
 
-const likePost = async (user_id, post_id, setLikeError) => {
+const likePost = async (user_id, post_id, setLikeError, setLikePost) => {
     // send POST like request to server
     const token = await getToken();
     return fetch(`http://localhost:3333/api/1.0.0/user/${user_id}/post/${post_id}/like`, {
@@ -11,7 +11,7 @@ const likePost = async (user_id, post_id, setLikeError) => {
     })
     .then((response) => {
         if(response.status === 200) {
-            console.log("post liked");
+            setLikePost(true);
         } else  {
             setLikeError(true);
         }

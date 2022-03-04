@@ -10,24 +10,35 @@ import CustomButton from './CustomButton';
 import deletePost from '../../functions/requests/deletePost';
 const Post = (props) => {
 
-    const [like, setLike] = useState(false);
+    const [likedPost, setLikePost] = useState(false);
+    const [unlikedPost, setUnLikePost] = useState(false);
     const [myID, setMyID] = useState(0)
     const [isMyPost, setIsMyPost] = useState(false);
     const [yourPostError, setYourPostError] = useState(false);
     const [likeError, setLikeError] = useState(false);
+    const [likesNum, setLikesNum] = useState(0);
     useEffect(() => {
         getId().then((id) => {
             setMyID(parseInt(id))
             if(props.data.author.user_id === parseInt(id))
                 setIsMyPost(true);
         })
+        setLikesNum(props.data.numLikes);
     },[]) 
+
+    useEffect(() => {
+        if(likedPost) {
+            setLikesNum(likesNum + 1);
+        } else if(unlikedPost) {
+            setLikesNum(likesNum - 1)
+        }
+    },[likedPost, unlikedPost])
     
     const handleLikePost = () => {
         if(!likeError)
         {
             if(!isMyPost)
-                likePost(props.data.author.user_id, props.data.post_id, setLikeError)
+                likePost(props.data.author.user_id, props.data.post_id, setLikeError, setLikePost)
             else {
                 setYourPostError(true);
             }
@@ -38,7 +49,7 @@ const Post = (props) => {
         if(!likeError)
         {
             if(!isMyPost)
-                unlikePost(props.data.author.user_id, props.data.post_id, setLikeError)
+                unlikePost(props.data.author.user_id, props.data.post_id, setLikeError, setUnLikePost)
             else {
                 setYourPostError(true);
             }
@@ -85,7 +96,7 @@ const Post = (props) => {
                 <CustomButton text="Unlike" style={styles.unlikeButton} onClick={handleUnlikePost}/>
                 <CustomButton text="Edit" style={styles.editButton} onClick={handleEdit}/>
                 <CustomButton text="Delete" style={styles.deleteButton} onClick={handleDelete}/>
-                <Text style={styles.likeCounter}>Likes: {props.data.numLikes}</Text>
+                <Text style={styles.likeCounter}>Likes: {likesNum}</Text>
             </View>
             {renderYourPostError()}
             {renderLikeError()}
