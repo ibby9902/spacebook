@@ -1,20 +1,36 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
+
 const ProfileHeader = (props) => {
-    const onFriendsPress = () => {
-        props.navigation.push("UsersFriends", {firstName: props.firstName, id: props.id});
+
+    const renderProfilePhotoOrClickable = () => {
+        if(props.isMyProfile) {
+            return (
+                <TouchableOpacity style={styles.imageContainer} onPress={() => console.log("pfp clicked")}>
+                    <Image source={props.photo} style={{flex: 1}}/>
+                </TouchableOpacity>
+            )
+        }
+        else {
+            return (
+                <View style={styles.imageContainer}>
+                    <Image source={props.photo} style={{flex: 1}}/>
+                </View>
+            )
+        }
     }
+
     return(
         <View style={styles.profileHeader}>
-            <TouchableOpacity style={styles.imageContainer}/>
+            {renderProfilePhotoOrClickable()}
             <View style={{flexDirection:'row', marginVertical: 10}}>
                 <View style={{flex: 1, justifyContent: 'center', paddingRight: 10}}>
                     <Text style={styles.name}>{props.firstName} <Text style={styles.name}>{props.lastName}</Text></Text>
                 </View>
                 <CustomButton text={`Friends: ${props.friendCount}`} style={styles.friendsButton} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}
-                onClick={onFriendsPress}/>
+                onClick={() => props.navigation.push("UsersFriends", {firstName: props.firstName, id: props.id})}/>
             </View>
             
         </View>
@@ -27,8 +43,6 @@ const styles = StyleSheet.create({
         height: 200,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        //borderBottomWidth: 1,
-        //borderColor: theme.TEXT_LESS_WHITE,
 
     },
     name: {
@@ -42,7 +56,6 @@ const styles = StyleSheet.create({
         height: 100,
         margin: 0,
         backgroundColor: 'green',
-        borderRadius: 50,
     },
     friendsButton: {
         padding: 10,
