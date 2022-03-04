@@ -17,6 +17,8 @@ const Post = (props) => {
     const [yourPostError, setYourPostError] = useState(false);
     const [likeError, setLikeError] = useState(false);
     const [likesNum, setLikesNum] = useState(0);
+    const [postDeleted, setPostDeleted] = useState(false);
+    const [postDeleteError, setPostDeleteError] = useState(false);
     useEffect(() => {
         getId().then((id) => {
             setMyID(parseInt(id))
@@ -62,7 +64,7 @@ const Post = (props) => {
     }
 
     const handleDelete = () => {
-        deletePost();
+        deletePost(props.data.author.user_id, props.data.post_id, setPostDeleted, setPostDeleteError);
     }
 
     const renderYourPostError = () => {
@@ -95,6 +97,22 @@ const Post = (props) => {
             )
         }
     }
+
+    const renderDeleteSuccessText = () => {
+        if(postDeleted) {
+            return (
+                <Text style={{color: theme.TEXT_LESS_WHITE}}>Post Deleted!</Text>
+            )
+        }
+    }
+
+    const renderDeleteErrorText = () => {
+        if(postDeleteError) {
+            return (
+                <Text style={{color: theme.TEXT_LESS_WHITE}}>Error deleting post</Text>
+            )
+        }
+    }
     return (
         <View style={styles.postContainer}>
             <View>
@@ -115,6 +133,8 @@ const Post = (props) => {
             </View>
             {renderYourPostError()}
             {renderLikeError()}
+            {renderDeleteSuccessText()}
+            {renderDeleteErrorText()}
         </View>
     )
 
