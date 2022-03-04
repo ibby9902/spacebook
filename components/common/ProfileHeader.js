@@ -8,7 +8,7 @@ const ProfileHeader = (props) => {
     const renderProfilePhotoOrClickable = () => {
         if(props.isMyProfile) {
             return (
-                <TouchableOpacity style={styles.imageContainer} onPress={() => console.log("pfp clicked")}>
+                <TouchableOpacity style={styles.imageContainer} onPress={() => props.navigation.navigate("UploadImage", {pickImage: props.pickImage})}>
                     <Image source={props.photo} style={{flex: 1}}/>
                 </TouchableOpacity>
             )
