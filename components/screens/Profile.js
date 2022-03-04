@@ -10,6 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import CustomActivityIndicator from '../common/CustomActivityIndicator';
 import CustomButton from '../common/CustomButton';
 import getProfilePhoto from '../../functions/requests/getProfilePhoto';
+
 const Profile = (props) => {
     const [isPostLoading, setIsPostLoading] = useState(true);
     const [isUserLoading, setIsUserLoading] = useState(true);
@@ -19,6 +20,7 @@ const Profile = (props) => {
     const [isMyProfile, setIsMyProfile] = useState(false);
     const [isTabProfile, setIsTabProfile] = useState(false);
     const [photo, setPhoto] = useState('');
+    
     useEffect(() => {
         getUserData(props.route.params.id, setUserData, setIsUserLoading);
         getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading)
@@ -29,6 +31,7 @@ const Profile = (props) => {
         // updates page when we add a new post
         const willFocusSubscription = props.navigation.addListener('focus', () => {
             getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading);
+            getProfilePhoto(props.route.params.id, setPhoto);
         });
         return willFocusSubscription;
     },[])
