@@ -25,6 +25,12 @@ const Profile = (props) => {
         setIsTabProfile(props.route.params.tabProfile)
         getId().then((res) => setMyID(parseInt(res)))
         getProfilePhoto(props.route.params.id, setPhoto);
+
+        // updates page when we add a new post
+        const willFocusSubscription = props.navigation.addListener('focus', () => {
+            getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading);
+        });
+        return willFocusSubscription;
     },[])
 
     useEffect(() => {
