@@ -58,6 +58,14 @@ const Profile = (props) => {
         }
         
     }
+
+    const renderNoPostText = () => {
+        if(postData.length === 0) {
+            return (
+                <Text style={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}>No Posts</Text>
+            )
+        }
+    }
         
     if(isPostLoading && isUserLoading){
         return(
@@ -77,6 +85,7 @@ const Profile = (props) => {
                         text={"Add Post"} style={styles.addPostButton} textStyle={{color: theme.TEXT_WHITE, fontWeight: 'bold'}}/>
                     </View>
                     <View style={styles.postContainer}>
+                        {renderNoPostText()}
                         <FlatList data={postData} renderItem={({item}) => 
                             <MiniPost moveToSinglePost={() => props.navigation.navigate("SinglePost", {userId: props.route.params.id ,postId: item.post_id, profile_id: props.route.params.id})} data={item}/> } keyExtractor={({post_id}, index) => post_id}/>
                     </View>
