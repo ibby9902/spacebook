@@ -31,7 +31,7 @@ const SinglePost = (props) => {
         return (
             
             <View style={styles.container}>
-                <Post data={post} moveToEditPost={moveToEditPost}/>
+                <Post data={post} moveToEditPost={moveToEditPost} profile_id={props.route.params.profile_id}/>
             </View>
         )
     }

@@ -80,7 +80,21 @@ const Post = (props) => {
         }
     }
 
-    
+    const renderEditButton = () => {
+        if(props.data.author.user_id === myID) {
+            return (
+                <CustomButton text="Edit" style={styles.editButton} onClick={handleEdit}/>
+            )
+        }
+    }
+
+    const renderDeleteButton = () => {
+        if(parseInt(props.profile_id) === myID) {
+            return (
+                <CustomButton text="Delete" style={styles.deleteButton} onClick={handleDelete}/>
+            )
+        }
+    }
     return (
         <View style={styles.postContainer}>
             <View>
@@ -94,8 +108,9 @@ const Post = (props) => {
             <View style={styles.bottomContainer}>
                 <CustomButton text="Like" style={styles.likeButton} onClick={handleLikePost}/>
                 <CustomButton text="Unlike" style={styles.unlikeButton} onClick={handleUnlikePost}/>
-                <CustomButton text="Edit" style={styles.editButton} onClick={handleEdit}/>
-                <CustomButton text="Delete" style={styles.deleteButton} onClick={handleDelete}/>
+                {renderEditButton()}
+                
+                {renderDeleteButton()}
                 <Text style={styles.likeCounter}>Likes: {likesNum}</Text>
             </View>
             {renderYourPostError()}
