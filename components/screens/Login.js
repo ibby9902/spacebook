@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import login from '../../functions/requests/login';
 import CustomInput from '../common/CustomInput';
 import CustomButton from '../common/CustomButton';
@@ -15,11 +16,16 @@ const LoginScreen = ({ navigation }) => {
 
   const [loginInvalid, setLoginInvalid] = useState(false);
 
+  const isFocused = useIsFocused();
   useEffect(() => {
     if (isLoggedIn) {
       navigation.navigate('Main');
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    setIsLoggedIn(false);
+  }, [isFocused]);
 
   const handleLogin = () => {
     const data = {
