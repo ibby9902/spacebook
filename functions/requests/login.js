@@ -1,6 +1,6 @@
 import storeData from '../storeData';
 
-const login = async (data, setIsLoggedIn, setLoginError) => {
+const login = async (data, setIsLoggedIn, setLoginError, setConnectionError) => {
   return fetch('http://localhost:3333/api/1.0.0/login', {
     method: 'post',
     headers: {
@@ -18,6 +18,7 @@ const login = async (data, setIsLoggedIn, setLoginError) => {
     storeData('token', responseJson.token);
     setIsLoggedIn(true);
   }).catch((error) => {
+    setConnectionError(true);
     console.log(error);
   });
 };

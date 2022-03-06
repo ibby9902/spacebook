@@ -14,7 +14,7 @@ const LoginScreen = ({ navigation }) => {
   const [loginError, setLoginError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [loginInvalid, setLoginInvalid] = useState(false);
+  const [connectionError, setConnectionError] = useState(false);
 
   const isFocused = useIsFocused();
   useEffect(() => {
@@ -32,12 +32,18 @@ const LoginScreen = ({ navigation }) => {
       email,
       password,
     };
-    login(data, setIsLoggedIn, setLoginError);
+    login(data, setIsLoggedIn, setLoginError, setConnectionError);
   };
 
   const statusText = () => {
     if (loginError) {
       return <Text style={styles.statusText}>Invalid email or password</Text>;
+    }
+  };
+
+  const connectionErrorText = () => {
+    if (connectionError) {
+      return <Text style={styles.statusText}>Connection Error!</Text>;
     }
   };
 
@@ -52,6 +58,7 @@ const LoginScreen = ({ navigation }) => {
         <CustomButton text="Login" onClick={handleLogin} style={styles.loginButton} textStyle={styles.loginText} />
         <CustomButton text="Sign Up " onClick={() => navigation.navigate('Signup')} style={styles.signupButton} textStyle={styles.signupText} />
         {statusText()}
+        {connectionErrorText()}
       </View>
     </View>
   );
