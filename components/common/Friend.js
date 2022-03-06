@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.GREY_BLUE,
     flexDirection: 'row',
     justifyContent: 'center',
+    marginTop: 5,
   },
   viewProfile: {
     width: 100,
