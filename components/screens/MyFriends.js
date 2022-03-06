@@ -11,6 +11,11 @@ const MyFriends = (props) => {
 
   useEffect(() => {
     getFriends(props.route.params.id, setIsLoading, setFriends);
+    // updates page when we add a new post
+    const willFocusSubscription = props.navigation.addListener('focus', () => {
+      getFriends(props.route.params.id, setIsLoading, setFriends);
+    });
+    return willFocusSubscription;
   }, []);
 
   if (isLoading) {
