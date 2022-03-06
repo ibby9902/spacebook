@@ -31,6 +31,9 @@
         "no-else-return": 0,
         "radix": 0,
         "max-len": 0,
-        "consistent-return": 0
+        "consistent-return": 0,
+        "react/jsx-boolean-value": 0,
+        "camelcase": 0,
+        "no-unused-vars": 0
     }
 }
