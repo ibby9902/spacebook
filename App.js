@@ -8,14 +8,15 @@ import Main from './components/Main';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName='Login'>
-                <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
-                <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
-                <Stack.Screen name="Signup" component={Signup}/>
-            </Stack.Navigator>
-        </NavigationContainer>
-        );
-}
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={Signup} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
 export default App;
