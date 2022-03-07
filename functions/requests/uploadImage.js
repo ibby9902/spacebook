@@ -1,7 +1,7 @@
 import getToken from '../getToken';
 import getId from '../getId';
 
-const uploadImage = async (image, setImageUploaded) => {
+const uploadImage = async (image, setImageUploaded, setImageUploadedSuccess, setImageUploadedError) => {
   const token = await getToken();
   const id = await getId();
   fetch(image).then((res) => res.blob()).then(async (blob) => {
@@ -17,9 +17,13 @@ const uploadImage = async (image, setImageUploaded) => {
       });
       if (response.status === 200) {
         setImageUploaded(true);
+        setImageUploadedSuccess(true);
+      } else {
+        setImageUploadedError(true);
       }
     } catch (error) {
       console.log(error);
+      setImageUploadedError(true);
     }
   });
 };
