@@ -19,10 +19,6 @@ const SinglePost = (props) => {
     }
   }, [post]);
 
-  const moveToEditPost = () => {
-    props.navigation.navigate('EditPost');
-  };
-
   if (isLoading) {
     return (
       <CustomActivityIndicator />
@@ -30,7 +26,7 @@ const SinglePost = (props) => {
   } else {
     return (
       <View style={styles.container}>
-        <Post data={post} moveToEditPost={moveToEditPost} profile_id={props.route.params.profile_id} />
+        <Post data={post} profile_id={props.route.params.profile_id} navigation={props.navigation} />
       </View>
     );
   }
