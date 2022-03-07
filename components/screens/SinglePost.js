@@ -11,6 +11,11 @@ const SinglePost = (props) => {
   useEffect(() => {
     // use post_id from props to get a singular post
     getSinglePost(props.route.params.userId, props.route.params.postId, setPost, setIsLoading);
+
+    const willFocusSubscription = props.navigation.addListener('focus', () => {
+      getSinglePost(props.route.params.userId, props.route.params.postId, setPost, setIsLoading);
+    });
+    return willFocusSubscription;
   }, []);
 
   useEffect(() => {
