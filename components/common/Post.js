@@ -57,7 +57,7 @@ const Post = (props) => {
   };
 
   const handleEdit = () => {
-    props.moveToEditPost();
+    props.navigation.navigate('EditPost');
   };
 
   const handleDelete = () => {
