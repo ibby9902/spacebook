@@ -14,8 +14,8 @@ const getFriends = async (id, setIsLoading, setFriends) => {
   }).then((responseJson) => {
     if (setIsLoading !== null) {
       setIsLoading(false);
-      setFriends(responseJson);
     }
+    setFriends(responseJson);
   }).catch((error) => {
     console.log(error);
   });
