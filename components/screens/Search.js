@@ -11,7 +11,7 @@ import getFriends from '../../functions/requests/getFriends';
 const Search = (props) => {
   const [query, setQuery] = useState('');
   const [isSelected, setSelection] = useState(false);
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(1);
   const [offset, setOffset] = useState(0);
   const [users, setUsers] = useState([]);
   const [myID, setMyID] = useState(0);
@@ -26,15 +26,24 @@ const Search = (props) => {
 
   const handleSearch = () => {
     const searchIn = (isSelected) ? 'friends' : 'all';
-    searchUser(query, searchIn, limit, offset, setUsers);
+    searchUser(query, searchIn, limit, offset, setUsers, users);
   };
 
+  const handleLoadMore = () => {
+    console.log('end');
+    const newOffset = offset + limit;
+    setOffset(offset + limit);
+    const searchIn = (isSelected) ? 'friends' : 'all';
+    searchUser(query, searchIn, limit, newOffset, setUsers, users);
+  };
   const renderUsers = () => {
     return (
       <FlatList
         data={users}
         renderItem={({ item }) => <SearchedUser firstName={item.user_givenname} lastName={item.user_familyname} id={item.user_id} myID={myID} friends={friends} navigation={props.navigation} />}
         keyExtractor={({ user_id }, index) => user_id}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0}
       />
     );
   };
