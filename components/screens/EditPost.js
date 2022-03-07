@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import editPost from '../../functions/requests/editPost';
 import CustomInput from '../common/CustomInput';
 import CustomButton from '../common/CustomButton';
 import updatePost from '../../functions/requests/updatePost';
