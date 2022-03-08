@@ -32,6 +32,7 @@ const Profile = (props) => {
     const willFocusSubscription = props.navigation.addListener('focus', () => {
       getAllUserPosts(props.route.params.id, setPostData, setIsPostLoading);
       getProfilePhoto(props.route.params.id, setPhoto);
+      getUserData(props.route.params.id, setUserData, setIsUserLoading);
     });
     return willFocusSubscription;
   }, []);
