@@ -7,6 +7,7 @@ import AddNewPost from '../screens/AddNewPost';
 import EditPost from '../screens/EditPost';
 import Drafts from '../screens/Drafts';
 import UploadImage from '../screens/UploadImage';
+import EditDraft from '../screens/EditDraft';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const ProfileStack = ({ route }) => {
       <Stack.Screen name="EditPost" component={EditPost} />
       <Stack.Screen name="Drafts" component={Drafts} />
       <Stack.Screen name="UploadImage" component={UploadImage} />
+      <Stack.Screen name="EditDraft" component={EditDraft} />
     </Stack.Navigator>
   );
 };
