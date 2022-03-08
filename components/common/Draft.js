@@ -4,6 +4,7 @@ import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
 import deleteDraft from '../../functions/deleteDraft';
 import AddPost from '../../functions/requests/AddPost';
+import CustomInput from './CustomInput';
 
 const Draft = (props) => {
   const [postSuccess, setPostSent] = useState(false);
@@ -20,7 +21,7 @@ const Draft = (props) => {
   };
 
   const handleEdit = () => {
-    // move screens
+    props.navigation.navigate('EditDraft', { postText: props.text, index: props.index, drafts: props.data });
   };
 
   const renderPostSend = () => {
@@ -43,7 +44,7 @@ const Draft = (props) => {
       <View style={styles.buttonContainer}>
         <CustomButton text="Send" textStyle={styles.text} style={styles.button} onClick={handleSend} />
         <CustomButton text="Delete" textStyle={styles.text} style={styles.button} onClick={handleDelete} />
-        <CustomButton text="Edit" textStyle={styles.text} style={styles.button} />
+        <CustomButton text="Edit" textStyle={styles.text} style={styles.button} onClick={handleEdit} />
       </View>
       {renderPostSend()}
       {renderPostError()}
