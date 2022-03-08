@@ -26,7 +26,6 @@ const Post = (props) => {
       }
     });
     setLikesNum(props.data.numLikes);
-    console.log(`User_ID: ${props.data.author.user_id} Post id: ${props.data.post_id}`);
   }, []);
 
   const handleLikePost = () => {
