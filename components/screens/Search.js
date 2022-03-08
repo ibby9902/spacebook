@@ -11,7 +11,7 @@ import getFriends from '../../functions/requests/getFriends';
 const Search = (props) => {
   const [query, setQuery] = useState('');
   const [isSelected, setSelection] = useState(false);
-  const [limit, setLimit] = useState(1);
+  const [limit, setLimit] = useState(11);
   const [offset, setOffset] = useState(0);
   const [users, setUsers] = useState([]);
   const [myID, setMyID] = useState(0);
