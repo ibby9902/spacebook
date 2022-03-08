@@ -8,6 +8,7 @@ import EditPost from '../screens/EditPost';
 import Drafts from '../screens/Drafts';
 import UploadImage from '../screens/UploadImage';
 import EditDraft from '../screens/EditDraft';
+import ScheduleDraft from '../screens/ScheduleDraft';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const ProfileStack = ({ route }) => {
       <Stack.Screen name="Drafts" component={Drafts} />
       <Stack.Screen name="UploadImage" component={UploadImage} />
       <Stack.Screen name="EditDraft" component={EditDraft} />
+      <Stack.Screen name="ScheduleDraft" component={ScheduleDraft} />
     </Stack.Navigator>
   );
 };
