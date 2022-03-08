@@ -4,7 +4,7 @@ import theme from '../../assets/theme';
 import getDrafts from '../../functions/getDrafts';
 import Draft from '../common/Draft';
 
-const Drafts = () => {
+const Drafts = (props) => {
   const [drafts, setDrafts] = useState([]);
   const [draftDeleted, setDraftDeleted] = useState(false);
   useEffect(() => {
@@ -20,7 +20,7 @@ const Drafts = () => {
     <View style={styles.container}>
       <FlatList
         data={drafts}
-        renderItem={({ item, index }) => <Draft text={item.post} index={index} setDraftDeleted={setDraftDeleted} />}
+        renderItem={({ item, index }) => <Draft text={item.post} index={index} setDraftDeleted={setDraftDeleted} id={props.route.params.id} />}
         keyExtractor={(item, index) => index.toString()}
       />
     </View>

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
 import deleteDraft from '../../functions/deleteDraft';
+import AddPost from '../../functions/requests/AddPost';
 
 const Draft = (props) => {
+  const [postSuccess, setPostSent] = useState(false);
+  const [postError, setPostError] = useState(false);
+
   const handleSend = () => {
-    console.log('send post');
+    AddPost(props.id, props.text, setPostSent, setPostError);
+    handleDelete();
   };
 
   const handleDelete = () => {
@@ -18,16 +23,30 @@ const Draft = (props) => {
     // move screens
   };
 
+  const renderPostSend = () => {
+    if (postSuccess) {
+      return <Text style={styles.statusText}>Post Sent!</Text>;
+    }
+  };
+
+  const renderPostError = () => {
+    if (postError) {
+      return <Text style={styles.statusText}>Post Error</Text>;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.postContainer}>
         <Text style={styles.text}>{props.text}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton text="Send" textStyle={styles.text} style={styles.button} />
+        <CustomButton text="Send" textStyle={styles.text} style={styles.button} onClick={handleSend} />
         <CustomButton text="Delete" textStyle={styles.text} style={styles.button} onClick={handleDelete} />
         <CustomButton text="Edit" textStyle={styles.text} style={styles.button} />
       </View>
+      {renderPostSend()}
+      {renderPostError()}
     </View>
   );
 };
@@ -60,6 +79,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  statusText: {
+    color:
+    theme.TEXT_WHITE,
+    fontWeight: 'bold',
   },
 });
 
