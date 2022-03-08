@@ -46,7 +46,7 @@ const AddNewPost = (props) => {
 
   return (
     <View style={styles.container}>
-      <CustomButton text="View Drafts" style={styles.viewDrafts} onClick={() => props.navigation.navigate('Drafts', { id: props.route.params.user_id })} />
+      <CustomButton text="View Drafts" style={styles.viewDrafts} onClick={() => props.navigation.navigate('Drafts', { id: props.route.params.user_id })} textStyle={{ color: theme.TEXT_WHITE }} />
       <CustomInput multiline={true} setValue={onChangePostText} value={postText} placeholder={"What's happening?"} styles={styles.input} />
       <CustomButton text="Send Post" style={styles.button} textStyle={{ color: theme.TEXT_WHITE }} onClick={handleAddPost} />
       <CustomButton text="Save Post as draft" style={styles.draft} textStyle={{ color: theme.TEXT_WHITE }} onClick={handleDraft} />
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   viewDrafts: {
     width: 80,
     height: 30,
-    backgroundColor: 'red',
+    backgroundColor: theme.TEXT_GREY,
   },
 });
 

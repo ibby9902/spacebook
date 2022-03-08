@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   add: {
     width: 80,
     height: 40,
-    backgroundColor: 'blue',
+    backgroundColor: theme.TEXT_GREY,
   },
   buttonContainer: {
     flexDirection: 'row',
