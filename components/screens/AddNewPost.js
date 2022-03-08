@@ -10,6 +10,7 @@ const AddNewPost = (props) => {
   const [postText, onChangePostText] = useState('');
   const [postSent, setPostSent] = useState(false);
   const [postError, setPostError] = useState(false);
+  const [draftSaved, setDraftSaved] = useState(false);
   useEffect(() => {
     props.navigation.setOptions({ title: 'Add a new post!' });
   }, []);
@@ -22,6 +23,7 @@ const AddNewPost = (props) => {
 
   const handleDraft = () => {
     appendDraft(postText);
+    setDraftSaved(true);
   };
 
   const renderPostSentText = () => {
@@ -36,13 +38,20 @@ const AddNewPost = (props) => {
     }
   };
 
+  const renderDraftSaved = () => {
+    if (draftSaved) {
+      return <Text style={{ color: theme.TEXT_WHITE, fontWeight: 'bold' }}>Draft Saved</Text>;
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <CustomButton text="View Drafts" style={styles.viewDrafts} onClick={() => props.navigation.navigate('Drafts')} />
+      <CustomButton text="View Drafts" style={styles.viewDrafts} onClick={() => props.navigation.navigate('Drafts', { id: props.route.params.user_id })} />
       <CustomInput multiline={true} setValue={onChangePostText} value={postText} placeholder={"What's happening?"} styles={styles.input} />
       <CustomButton text="Send Post" style={styles.button} textStyle={{ color: theme.TEXT_WHITE }} onClick={handleAddPost} />
       <CustomButton text="Save Post as draft" style={styles.draft} textStyle={{ color: theme.TEXT_WHITE }} onClick={handleDraft} />
       {renderPostSentText()}
+      {renderDraftSaved()}
     </View>
   );
 };
