@@ -7,6 +7,9 @@ import Profile from '../screens/Profile';
 import EditPost from '../screens/EditPost';
 import UsersFriends from '../screens/UsersFriends';
 import AddNewPost from '../screens/AddNewPost';
+import Drafts from '../screens/Drafts';
+import EditDraft from '../screens/EditDraft';
+import ScheduleDraft from '../screens/ScheduleDraft';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +24,9 @@ const FriendsStack = ({ route }) => {
       <Stack.Screen name="EditPost" component={EditPost} />
       <Stack.Screen name="UsersFriends" component={UsersFriends} />
       <Stack.Screen name="AddNewPost" component={AddNewPost} />
+      <Stack.Screen name="Drafts" component={Drafts} />
+      <Stack.Screen name="EditDraft" component={EditDraft} />
+      <Stack.Screen name="ScheduleDraft" component={ScheduleDraft} />
     </Stack.Navigator>
   );
 };
