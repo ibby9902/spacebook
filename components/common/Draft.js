@@ -4,7 +4,6 @@ import CustomButton from './CustomButton';
 import theme from '../../assets/theme';
 import deleteDraft from '../../functions/deleteDraft';
 import AddPost from '../../functions/requests/AddPost';
-import CustomInput from './CustomInput';
 
 const Draft = (props) => {
   const [postSuccess, setPostSent] = useState(false);
@@ -36,6 +35,10 @@ const Draft = (props) => {
     }
   };
 
+  const handleSchedule = () => {
+    props.navigation.navigate('ScheduleDraft', { postText: props.text, id: props.id, index: props.index });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.postContainer}>
@@ -45,6 +48,7 @@ const Draft = (props) => {
         <CustomButton text="Send" textStyle={styles.text} style={styles.button} onClick={handleSend} />
         <CustomButton text="Delete" textStyle={styles.text} style={styles.button} onClick={handleDelete} />
         <CustomButton text="Edit" textStyle={styles.text} style={styles.button} onClick={handleEdit} />
+        <CustomButton text="Schedule" textStyle={styles.text} style={styles.button} onClick={handleSchedule} />
       </View>
       {renderPostSend()}
       {renderPostError()}
