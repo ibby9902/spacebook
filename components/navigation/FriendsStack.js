@@ -6,6 +6,7 @@ import SinglePost from '../screens/SinglePost';
 import Profile from '../screens/Profile';
 import EditPost from '../screens/EditPost';
 import UsersFriends from '../screens/UsersFriends';
+import AddNewPost from '../screens/AddNewPost';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const FriendsStack = ({ route }) => {
       <Stack.Screen name="SinglePost" component={SinglePost} />
       <Stack.Screen name="EditPost" component={EditPost} />
       <Stack.Screen name="UsersFriends" component={UsersFriends} />
+      <Stack.Screen name="AddNewPost" component={AddNewPost} />
     </Stack.Navigator>
   );
 };
