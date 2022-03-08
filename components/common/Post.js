@@ -26,20 +26,14 @@ const Post = (props) => {
       }
     });
     setLikesNum(props.data.numLikes);
+    console.log(`User_ID: ${props.data.author.user_id} Post id: ${props.data.post_id}`);
   }, []);
-
-  useEffect(() => {
-    if (likedPost) {
-      setLikesNum(likesNum + 1);
-    } else if (unlikedPost) {
-      setLikesNum(likesNum - 1);
-    }
-  }, [likedPost, unlikedPost]);
 
   const handleLikePost = () => {
     if (!likeError) {
       if (!isMyPost) {
-        likePost(props.data.author.user_id, props.data.post_id, setLikeError, setLikePost);
+        likePost(props.profile_id, props.data.post_id, setLikeError, setLikePost);
+        setLikesNum(likesNum + 1);
       } else {
         setYourPostError(true);
       }
@@ -49,7 +43,10 @@ const Post = (props) => {
   const handleUnlikePost = () => {
     if (!likeError) {
       if (!isMyPost) {
-        unlikePost(props.data.author.user_id, props.data.post_id, setLikeError, setUnLikePost);
+        unlikePost(props.profile_id, props.data.post_id, setLikeError, setUnLikePost);
+        if (likesNum > 0) {
+          setLikesNum(likesNum - 1);
+        }
       } else {
         setYourPostError(true);
       }
@@ -61,7 +58,7 @@ const Post = (props) => {
   };
 
   const handleDelete = () => {
-    deletePost(props.data.author.user_id, props.data.post_id, setPostDeleted, setPostDeleteError);
+    deletePost(props.profile_id, props.data.post_id, setPostDeleted, setPostDeleteError);
   };
 
   const renderYourPostError = () => {
@@ -74,7 +71,7 @@ const Post = (props) => {
   const renderLikeError = () => {
     if (likeError) {
       return (
-        <Text style={{ color: theme.TEXT_LESS_WHITE }}>You have already like/unliked this post!</Text>
+        <Text style={{ color: theme.TEXT_LESS_WHITE }}>Error</Text>
       );
     }
   };
@@ -88,7 +85,7 @@ const Post = (props) => {
   };
 
   const renderDeleteButton = () => {
-    if (parseInt(props.profile_id) === myID) {
+    if (props.data.author.user_id === myID) {
       return (
         <CustomButton text="Delete" style={styles.deleteButton} onClick={handleDelete} />
       );
